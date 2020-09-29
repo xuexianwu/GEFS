@@ -44,8 +44,9 @@ elif [[ "$WHERE_AM_I" == hera ]]; then
     module load netcdf/4.7.0
     module load nco/4.7.0
     module load hdf5/1.10.5
-    #module load anaconda/anaconda3-5.3.1
-    module load anaconda/latest
+
+    module use -a /contrib/anaconda/modulefiles
+    module  load anaconda/latest
 
     module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
     module load prod_util/1.1.0
