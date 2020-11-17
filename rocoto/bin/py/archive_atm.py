@@ -93,6 +93,7 @@ for directory in dirs_to_archive:
             directory=directory) )
         print("Creating tar on HPSS for {directory}".format(directory=directory))
         print("    From {output_path}/{directory} to {tar_file}".format(output_path=output_path, directory=directory, tar_file=tar_file))
+        print(f"htar -cvf {tar_file} {directory}")
         err_code = subprocess.call(["htar", "-cvf", tar_file, directory])
         if(err_code != 0):
             print("FATAL: Could not create {tar_file} on HPSS, error code: {err_code}".format(tar_file=tar_file, err_code=str(err_code)))

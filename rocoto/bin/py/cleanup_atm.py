@@ -53,8 +53,8 @@ from functools import partial
 print = partial(print, flush=True)
 
 # Output directories that need to be removed
-output_dirs = ["f2d", "f3d", "cfssst", "ensstat", "init", "misc", "sflux", "genesis", "master",
-				"pgrb2sp25", "pgrb2p25", "pgrb2ap5", "pgrb2bp5", "pgrb22p5", "sfcsig", 
+output_dirs = ["f2d", "f3d","sflux", "genesis", "master",
+				"pgrb2sp25", "pgrb2p25", "sfcsig", 
                 "tctrack", "bufr", "wmo"]
 output_dirs_last_cyc = ["restart", "sfcsig_enkf", "track_enkf", "gempak"]
 output_dir_pattern = "{work_dir}/com/gefs/dev/gefs.%Y%m%d/%H/atmos/{output_dir}"
@@ -107,8 +107,9 @@ for output_dir in output_dirs:
 
 # Other init directories
 #dirs_to_remove.append(time.strftime("{work_dir}/nwges/dev/gefs.%Y%m%d/*.t%Hz.*".format(work_dir=work_dir)))
-dirs_to_remove.append(time.strftime("{work_dir}/nwges/dev/gefs.%Y%m%d/%H/c00".format(work_dir=work_dir)))
-dirs_to_remove.append(time.strftime("{work_dir}/nwges/dev/gefs.%Y%m%d/%H/p*".format(work_dir=work_dir)))
+dirs_to_remove.append(time.strftime("{work_dir}/nwges/dev/gefs.%Y%m%d/%H/init/c00".format(work_dir=work_dir)))
+dirs_to_remove.append(time.strftime("{work_dir}/nwges/dev/gefs.%Y%m%d/%H/init/p*".format(work_dir=work_dir)))
+dirs_to_remove.append(time.strftime("{work_dir}/nwges/dev/gefs.%Y%m%d/%H/init/gfs_*.nc".format(work_dir=work_dir)))
 
 # Log directory (probably want to keep these)
 # dirs_to_remove.append(work_dir + "/com/output/dev/" + pdy + "/*_" + cycle + ".*.bqs3")

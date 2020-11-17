@@ -292,7 +292,7 @@ def create_metatask_task(dicBase, taskname="atmos_prep", sPre="\t", GenTaskEnt=F
     elif taskname == "avg_gempak_vgf":
         cycledef = "gefs_00z,gefs_12z"
 
-    maxtries = 1
+    maxtries = 2
 
     strings = ""
 
@@ -888,16 +888,18 @@ def get_param_of_task(dicBase, taskname):
 
     # for dependency
     sVarName = "{0}_dep".format(taskname).upper()
+    #print("---" + sVarName)
     if sVarName in dicBase:
         sDep = dicBase[sVarName.upper()]
+        #print(sDep)
         if sDep.strip() != "":  # identify whether include 'init_recenter' or not
 
             # For 'atmos_prep' task
-            if taskname.lower() == "atmos_prep":
-                if DoesTaskExist(dicBase, "init_combine"):
-                    sDep = '<taskdep task="init_combine"/>'
-                else:
-                    sDep = ""
+            #if taskname.lower() == "atmos_prep":
+            #    if DoesTaskExist(dicBase, "init_combine"):
+            #        sDep = '<taskdep task="init_combine"/>'
+            #    else:
+            #        sDep = ""
 
             # For 'init_recenter' task
             if taskname.lower() == "init_recenter":
@@ -1201,8 +1203,8 @@ def get_param_of_task(dicBase, taskname):
                     sDep += '\n\t<metataskdep metatask="keep_init"/>'
                 if DoesTaskExist(dicBase, "keep_data_atm"):
                     sDep += '\n\t<taskdep task="keep_data_atm"/>'
-                if DoesTaskExist(dicBase, "archive_atm"):
-                    sDep += '\n\t<taskdep task="archive_atm"/>'
+                #if DoesTaskExist(dicBase, "archive_atm"):
+                #    sDep += '\n\t<taskdep task="archive_atm"/>'
                 if sDep == '<and>':
                     sDep = ""
                 else:

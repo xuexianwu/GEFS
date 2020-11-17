@@ -36,6 +36,8 @@ def create_crontab(dicBase, OnlyForTest=False, cronint=5):
     sCrontab_FileName = dicBase['crontab'.upper()]
     sXML_FileName = dicBase['XML'.upper()]
     sDB_FileName = dicBase['DB'.upper()]
+    sWORKDIR = dicBase['WORKDIR'.upper()]
+    sKEEP_DIR = dicBase['KEEP_DIR'.upper()] 
 
     # print(sRocotoPath + "/" + sCrontab_FileName)
     crontab_string = '# This is a basic crontab file to use with given settings ' \
@@ -80,6 +82,8 @@ def create_crontab(dicBase, OnlyForTest=False, cronint=5):
         bash_file.write("\n")
         bash_file.write(rocotorun_args + "\n")
         bash_file.write("\n")
+        #bash_file.write("rsync -ah --progress  /gpfs/dell6/ptmp/Xianwu.Xue/o/gefs_v12_1_0_retro_JulAug/com/output /gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/GEFS/gefs_v12_1_0_retro_JulAug/\n")
+        bash_file.write(f"rsync -ah --progress {sWORKDIR}/com/output {sKEEP_DIR}/\n")
         bash_file.write("date\n")
         bash_file.close()
         os.chmod(sBashFile, 0o755)
