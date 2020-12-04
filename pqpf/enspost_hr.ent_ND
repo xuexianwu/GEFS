@@ -1,0 +1,48 @@
+<!-- **********enspost_hr********** -->
+<task name="enspost_hr" cycledefs="gefs" maxtries="1">
+	<jobname><cyclestr>&EXPID;_@Y@m@d@H_195</cyclestr></jobname>
+	<account>&ACCOUNT;</account>
+	<join><cyclestr>&LOG_DIR;/@Y@m@d/gefs_enspost_hr_@H.%J</cyclestr></join>
+	<walltime>01:30:00</walltime>
+	<queue>&CUE2RUN;</queue>
+	<nodes>1:ppn=1:tpp=2</nodes>
+	<native>-R 'affinity[core(1)]'</native>
+
+	&ENV_VARS;
+	&DATE_VARS;
+	<!-- Other Environment Variables -->
+	<envar>
+		<name>SOURCEDIR</name>
+		<value>&SOURCEDIR;</value>
+	</envar>
+	<envar>
+		<name>job</name>
+		<value><cyclestr>&EXPID;_@Y@m@d@H_195</cyclestr></value>
+	</envar>
+	<envar>
+		<name>GEFS_NTASKS</name>
+		<value>1</value>
+	</envar>
+	<envar>
+		<name>GEFS_NCORES_PER_NODE</name>
+		<value>2</value>
+	</envar>
+	<envar>
+		<name>GEFS_TPP</name>
+		<value>2</value>
+	</envar>
+	<envar>
+		<name>GEFS_PPN</name>
+		<value>1</value>
+	</envar>
+	<envar>
+		<name>GEFS_NODES</name>
+		<value>1</value>
+	</envar>
+	<envar>
+		<name>FORECAST_SEGMENT</name>
+		<value>hr</value>
+	</envar>
+	<command><cyclestr>&BIN;/enspost.sh</cyclestr></command>
+</task>
+
