@@ -1,8 +1,8 @@
-CHECK_DIR=/gpfs/dell2/emc/retros/noscrub/Dingchen.Hou/GIT/GEFS
-WORK_DIR=/gpfs/dell6/emc/modeling/noscrub/Dingchen.Hou/GEFS/ThHd
+CHECK_DIR=/gpfs/dell2/emc/retros/noscrub/Dingchen.Hou/GIT/GEFS_pqpf
+WORK_DIR=/gpfs/dell6/emc/modeling/noscrub/Dingchen.Hou/GEFS/ThHa
 #Before Start, make sure you have checked out the tag in right place and decided where to work
 cd $CHECK_DIR/rocoto
-compile_install_all.sh -r yes
+compile_install_all.sh -c yes
 cd $CHECK_DIR/pqpf
 
 mkdir -p $WORK_DIR
@@ -25,8 +25,6 @@ cp -pr GEFS/pqpf/ex* scripts
 cd rocoto
 compile_install_all.sh -r yes
 cp -pr ../GEFS/pqpf/enspost_hr.ent tasks
-cd ..
 
-compile_install_all.sh -b yes
+#compile_install_all.sh -b yes
 
-#You should be at $WORK_DIR/rocoto. If not, it went wrong somewhere 
