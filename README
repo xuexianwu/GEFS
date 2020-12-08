@@ -1,0 +1,29 @@
+12/04/220  This is the source I am running pqpf cron jobs
+
+this directory is cheked out from GitHub: DingchenHou-NOAA, hotfix/pqpf branch
+ 
+to set up a cron job, please do the following:
+
+cd pqpf
+modify set_pqpf_cron.sh for WORK_DIR and CHECK_DIR
+modify user_full.conf for SDATE and EDATE
+run et_pqpf_cron.sh
+cd $WORK_DIR
+cd rocoto
+compile_install_all.sh -b yes   (set up the cfron)
+
+When you need to rest SDATE/EDATE
+modify user_full.conf
+compile_install_all.sh -r yes
+
+If a cycle is not run (due to e.g. missing gefs prod files), you
+need to copy the  folllowing files from the prod machine
+enspost_grb2.tXXz.frzr
+enspost_grb2.tXXz.icep
+enspost_grb2.tXXz.prcp
+enspost_grb2.tXXz.snow
+enspost_grb2.tXXz.rain
+to the $COMOUT directory 
+and then modify the rocoto/bin/*p35/enspost.hr file in $WORK_DIR with
+COMIN=/gpfs/dell6/ptmp/Dingchen.Hou/o/ThHa/com/gefs/dev/gefs.20201207/06
+(check your $COMOUT path to make sure $COMIN matches with it) 
