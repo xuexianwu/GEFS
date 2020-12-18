@@ -8,6 +8,8 @@ def assign_default_for_xml_def(dicBase, sRocoto_WS=""):
         sSep = r'\\'
     # ==
     get_MEMLIST(dicBase)
+    get_MEMLIST0(dicBase)
+    get_MEMLIST1(dicBase)
     # ==
     sVarName = "First".upper()
     sVarValue = 'Xianwu'
@@ -596,7 +598,7 @@ def get_definitions(dicBase):
         Create entities related to the experiment
     '''
 
-    lstEntity = ["MEMLIST", "CYCLE_THROTTLE", "TASK_THROTTLE", "SDATE", "EDATE", \
+    lstEntity = ["MEMLIST", "MEMLIST0", "MEMLIST1", "CYCLE_THROTTLE", "TASK_THROTTLE", "SDATE", "EDATE", \
                  "INCYC", "WHERE_AM_I", "GEFS_ROCOTO", "BIN", "PRE", \
                  "WORKFLOW_LOG_DIR", "LOG_DIR", "tmpnwprd", "DATA_DIR", "EXPID", \
                  "PSLOT", "SOURCEDIR", "WORKDIR", "KEEP_DIR", "INIT_DIR", \
@@ -731,6 +733,75 @@ def get_MEMLIST(dicBase):
         for iNum in range(1, npert + 1):
             MEMLIST_Value += "p{0:02d} ".format(iNum)
         MEMLIST_Value += "c00"
+        # print(MEMLIST_Value)
+        dicBase[sVarName_List] = MEMLIST_Value
+
+# =======================================================
+def get_MEMLIST0(dicBase):
+    ### npert
+    ### npert means Number of Perturbation, default value is 20
+    ###
+    npert = 20
+    # To Generate member list
+    bltGenerateMEMLIST = False
+    sVarName_Num = "npert".upper()
+    sVarName_List = 'MEMLIST0'.upper()
+    if sVarName_Num in dicBase:
+        bltGenerateMEMLIST = True
+        npert = int(dicBase[sVarName_Num])
+    else:
+        if sVarName_List in dicBase:
+            bltGenerateMEMLIST = False
+        else:
+            npert = 20
+            dicBase[sVarName_Num] = npert
+            bltGenerateMEMLIST = True
+
+        npert = int(dicBase[sVarName_Num])
+
+    if npert < 2:
+        print("Please note that because of npert<2, so some tasks may not run!\n Especially enstat_hr and enstat_lr!")
+
+    if bltGenerateMEMLIST:
+        MEMLIST_Value = ""
+        #for iNum in range(1, npert + 1):
+        #    MEMLIST_Value += "p{0:02d} ".format(iNum)
+        MEMLIST_Value += "c00"
+        # print(MEMLIST_Value)
+        dicBase[sVarName_List] = MEMLIST_Value
+
+# =======================================================
+def get_MEMLIST1(dicBase):
+    ### npert
+    ### npert means Number of Perturbation, default value is 20
+    ###
+    npert = 20
+    # To Generate member list
+    bltGenerateMEMLIST = False
+    sVarName_Num = "npert".upper()
+    sVarName_List = 'MEMLIST1'.upper()
+    if sVarName_Num in dicBase:
+        bltGenerateMEMLIST = True
+        npert = int(dicBase[sVarName_Num])
+    else:
+        if sVarName_List in dicBase:
+            bltGenerateMEMLIST = False
+        else:
+            npert = 20
+            dicBase[sVarName_Num] = npert
+            bltGenerateMEMLIST = True
+
+        npert = int(dicBase[sVarName_Num])
+
+    if npert < 2:
+        print("Please note that because of npert<2, so some tasks may not run!\n Especially enstat_hr and enstat_lr!")
+
+    if bltGenerateMEMLIST:
+        MEMLIST_Value = ""
+        for iNum in range(1, npert):
+            MEMLIST_Value += "p{0:02d} ".format(iNum)
+        MEMLIST_Value += "p{0:02d}".format(npert)
+        #MEMLIST_Value += "c00"
         # print(MEMLIST_Value)
         dicBase[sVarName_List] = MEMLIST_Value
 

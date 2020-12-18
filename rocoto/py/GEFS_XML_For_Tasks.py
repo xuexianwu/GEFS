@@ -52,6 +52,10 @@ def config_tasknames(dicBase):
             iTaskName_Num += 1
             sTaskName = "taskname_{0}".format(iTaskName_Num)
             dicBase[sTaskName.upper()] = "atmos_prep"
+            # ---atmos_prep_c00
+            iTaskName_Num += 1
+            sTaskName = "taskname_{0}".format(iTaskName_Num)
+            dicBase[sTaskName.upper()] = "atmos_prep_c00"
 
             # ---init_recenter
             iTaskName_Num += 1
@@ -320,7 +324,12 @@ def create_metatask_task(dicBase, taskname="atmos_prep", sPre="\t", GenTaskEnt=F
         if taskname == "postsnd":
             strings += sPre + '\t' + '<var name="member">&MEMLIST; avg</var>\n'
         else:
-            strings += sPre + '\t' + '<var name="member">&MEMLIST;</var>\n'
+            if taskname == "atmos_prep":
+                strings += sPre + '\t' + '<var name="member">&MEMLIST1;</var>\n'
+            elif taskname == "atmos_prep_c00":
+                strings += sPre + '\t' + '<var name="member">&MEMLIST0;</var>\n'
+            else:
+                strings += sPre + '\t' + '<var name="member">&MEMLIST;</var>\n'
 
         strings += sPre + '\t' + '<task name="{0}_#member#" cycledefs="{1}" maxtries="{2}">\n'.format(taskname, cycledef, maxtries)
     else:
@@ -407,7 +416,7 @@ def create_metatask_task(dicBase, taskname="atmos_prep", sPre="\t", GenTaskEnt=F
         if taskname in metatask_names:
             strings += ""
         else:
-            if sQueue.endswith("_shared") and taskname in ['ensstat_hr', 'enspost_hr', 'ensstat_lr', 'enspost_lr', 'gempak', 'gempak_meta', 'avgspr_gempak_meta', 'ensavg_nemsio', 'postsnd', "fcst_post_manager", 'atmos_prep']:
+            if sQueue.endswith("_shared") and taskname in ['ensstat_hr', 'enspost_hr', 'ensstat_lr', 'enspost_lr', 'gempak', 'gempak_meta', 'avgspr_gempak_meta', 'ensavg_nemsio', 'postsnd', "fcst_post_manager", 'atmos_prep','atmos_prep_c00']:
                 strings += ""
             else:
                 strings += sPre_2 + "<native>-R 'affinity[core(1)]'</native>\n"
@@ -489,6 +498,8 @@ def create_metatask_task(dicBase, taskname="atmos_prep", sPre="\t", GenTaskEnt=F
         strings += sPre_2 + '<command><cyclestr>{1}&BIN;/{0}.sh</cyclestr></command>\n'.format("post_hr", sPRE)
     elif taskname.startswith("ensavg_nemsio_"):
         strings += sPre_2 + '<command><cyclestr>{1}&BIN;/{0}.sh</cyclestr></command>\n'.format("ensavg_nemsio", sPRE)
+    elif taskname.startswith("atmos_prep"):
+        strings += sPre_2 + '<command><cyclestr>{1}&BIN;/{0}.sh</cyclestr></command>\n'.format("atmos_prep", sPRE)
     else:
         strings += sPre_2 + '<command><cyclestr>{1}&BIN;/{0}.sh</cyclestr></command>\n'.format(taskname, sPRE)
     # -------------------Other envar and command-------------------
@@ -904,10 +915,21 @@ def get_param_of_task(dicBase, taskname):
             # For 'init_recenter' task
             if taskname.lower() == "init_recenter":
                 if DoesTaskExist(dicBase, "atmos_prep"):
-                    sDep = '<metataskdep metatask="atmos_prep"/>'
+                    sDep = "<and>"
+                    sDep += '\n\t<metataskdep metatask="atmos_prep"/>'
+                    sDep += '\n\t<metataskdep metatask="atmos_prep_c00"/>'
+                    sDep += "\n</and>"
+
                 else:
                     sDep = ""
 
+            if taskname.lower() == "atmos_prep":
+                sDep = "<and>"
+                npert = int(dicBase["NPERT"])
+                for k in range(1,npert+1):
+                   sDep += f'\n\t<datadep><cyclestr offset=\"-6:00:00\">/gpfs/dell3/ptmp/emc.glopara/ROTDIRS/v16rt2/gfs/para/enkfgdas.@Y@m@d/@H/atmos/mem{k:0>3d}/gdas.t@Hz.logf006.txt</cyclestr></datadep>'
+
+                sDep += "\n</and>"
             # For 'chem_init' task
             if taskname.lower() == "chem_init":
                 sDep = "<and>"
@@ -1203,6 +1225,10 @@ def get_param_of_task(dicBase, taskname):
                     sDep += '\n\t<metataskdep metatask="keep_init"/>'
                 if DoesTaskExist(dicBase, "keep_data_atm"):
                     sDep += '\n\t<taskdep task="keep_data_atm"/>'
+                if DoesTaskExist(dicBase, "ensstat_hr"):
+                    sDep += '\n\t<taskdep task="ensstat_hr"/>'
+                if DoesTaskExist(dicBase, "enspost_hr"):
+                    sDep += '\n\t<taskdep task="enspost_hr"/>'
                 #if DoesTaskExist(dicBase, "archive_atm"):
                 #    sDep += '\n\t<taskdep task="archive_atm"/>'
                 if sDep == '<and>':
@@ -1405,6 +1431,7 @@ def get_metatask_names(taskname=""):
     metatask_names.append('copy_init')
     # atmos_prep
     metatask_names.append('atmos_prep')
+    metatask_names.append('atmos_prep_c00')
     # forecast
     metatask_names.append('forecast_hr')
     metatask_names.append('forecast_lr')
