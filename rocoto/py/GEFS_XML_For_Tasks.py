@@ -897,6 +897,7 @@ def get_param_of_task(dicBase, taskname):
         elif taskname_org.startswith("ensavg_nemsio_"):
             sJoin = sJoin.replace("ensavg_nemsio", taskname_org)
 
+    COMPATH="/gpfs/dell1/nco/ops/com/gfs/para" #/gpfs/dell3/ptmp/emc.glopara/ROTDIRS/v16rt2/gfs/para
     # for dependency
     sVarName = "{0}_dep".format(taskname).upper()
     #print("---" + sVarName)
@@ -927,9 +928,17 @@ def get_param_of_task(dicBase, taskname):
                 sDep = "<and>"
                 npert = int(dicBase["NPERT"])
                 for k in range(1,npert+1):
-                   sDep += f'\n\t<datadep><cyclestr offset=\"-6:00:00\">/gpfs/dell3/ptmp/emc.glopara/ROTDIRS/v16rt2/gfs/para/enkfgdas.@Y@m@d/@H/atmos/mem{k:0>3d}/gdas.t@Hz.logf006.txt</cyclestr></datadep>'
+                    #sDep += f'\n\t<datadep><cyclestr offset=\"-6:00:00\">/gpfs/dell3/ptmp/emc.glopara/ROTDIRS/v16rt2/gfs/para/enkfgdas.@Y@m@d/@H/atmos/mem{k:0>3d}/gdas.t@Hz.logf006.txt</cyclestr></datadep>'
+                    sDep += f'\n\t<datadep><cyclestr offset=\"-6:00:00\">{COMPATH}/enkfgdas.@Y@m@d/@H/atmos/mem{k:0>3d}/gdas.t@Hz.logf006.txt</cyclestr></datadep>'
 
                 sDep += "\n</and>"
+
+            if taskname.lower() == "atmos_prep_c00":
+                sDep = f'<datadep><cyclestr>{COMPATH}/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.loganl.txt</cyclestr></datadep>'
+
+            if taskname.lower() == "getcfssst":
+                sDep = f'<datadep><cyclestr>{COMPATH}/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.loganl.txt</cyclestr></datadep>'
+
             # For 'chem_init' task
             if taskname.lower() == "chem_init":
                 sDep = "<and>"
