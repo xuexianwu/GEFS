@@ -3,7 +3,7 @@ WORK_DIR=/gpfs/dell6/emc/modeling/noscrub/Dingchen.Hou/GEFS/ThHa
 #Before Start, make sure you have checked out the tag in right place and decided where to work
 cd $CHECK_DIR/rocoto
 compile_install_all.sh -c yes
-cd $CHECK_DIR/pqpf
+#cd $CHECK_DIR/pqpf
 
 mkdir -p $WORK_DIR
 cd $WORK_DIR

@@ -2,21 +2,23 @@
 
 this directory is cheked out from GitHub: DingchenHou-NOAA, hotfix/pqpf branch
  
-to set up a cron job, please do the following:
+1. set up a cron job, please do the following:
 
 cd pqpf
 modify set_pqpf_cron.sh for WORK_DIR and CHECK_DIR
 modify user_full.conf for SDATE and EDATE
-run et_pqpf_cron.sh
+run set_pqpf_cron.sh
 cd $WORK_DIR
 cd rocoto
-compile_install_all.sh -b yes   (set up the cfron)
+modify the *xml file to delete the 4 extra jobs (keep enspost only)
+compile_install_all.sh -b yes   (set up the cron)
 
-When you need to rest SDATE/EDATE
+2. When you need to reset SDATE and/or EDATE
 modify user_full.conf
 compile_install_all.sh -r yes
+compile_install_all.sh -b yes   (set up the cron)
 
-If a cycle is not run (due to e.g. missing gefs prod files), you
+3. If a cycle is not run (due to e.g. missing gefs prod files), you
 need to copy the  folllowing files from the prod machine
 enspost_grb2.tXXz.frzr
 enspost_grb2.tXXz.icep
