@@ -1070,7 +1070,7 @@ def get_param_of_task(dicBase, taskname):
                 sDep = dicBase[sVarName].replace("fXXX", "f{0:03d}".format(start_hr_lr))
 
             # For 'enspost_hr' task
-            if taskname.lower() == "enspost_hr":
+            if taskname.lower() == "enspost_hr" and sDep.strip() == "":
                 sDep = '<and>'
                 if DoesTaskExist(dicBase, "prdgen_hr"):
                     sDep += '\n\t<metataskdep metatask="prdgen_hr"/>'

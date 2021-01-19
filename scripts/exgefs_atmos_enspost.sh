@@ -108,7 +108,7 @@ echo
 SLEEP_LOOP_MAX=$((SLEEP_TIME / SLEEP_INT))
 
 export fh=$SHOUR
-
+if [[ A == B ]] ; then
 ############################################################
 # Loop Through the Post Forecast Files
 ############################################################
@@ -466,6 +466,7 @@ if [[ "$cycle" == "t00z" ]] && [[ -z $ext_h ]]; then
 		cp ensppf${ext_h}.$PDY$cyc.grib2.idx $COMOUT/$COMPONENT/ensstat/ensstat${ext_h}.$cycle.pqpf_24h.grib2.idx
 	fi  #[ $SENDCOM = "YES" ]
 fi # test "$cycle" = "t00z"
+fi # (A=B)
 
 # part (1b): probabilistic forecasts ( PQPF, PQRF, PQFF, PQSF and PQIF )
 if [[ -z $ext_h ]]; then
@@ -487,6 +488,7 @@ if [[ -z $ext_h ]]; then
 
 fi
 
+if [[ A == B ]] ; then
 ############################################################################
 ###########  ADD DBN ALERTS FOR PPF AND PQPF FILES IF NEEDED  ##############
 ############################################################################
@@ -516,6 +518,7 @@ for file in $postvarlist; do
 		mv ensstat${ext_h}.$cycle.${file}i $COMOUT/$COMPONENT/ensstat/ensstat${ext_h}.${cycle}.${file}i
 	fi # [ "$SENDCOM" = "YES" ]
 done # for file in $postvarlist
+fi # (A=B)
 
 echo "$(date -u) end ${.sh.file}"
 
