@@ -30,7 +30,7 @@ eofCAT
       fi
     cat <<eofCAT >>$jobcontrol
 ##BSUB -q "dev_shared" 
-#BSUB -q "$class"
+#BSUB -q "devhigh"
 #BSUB -R "rusage[mem=$resources]"
 #BSUB -R affinity[${AFFINITY}]
 eofCAT
@@ -39,7 +39,7 @@ eofCAT
     if [[ ${MP_SHARED_MEMORY} = no ]] ; then
       cat <<eofCAT >>$jobcontrol
 ##BSUB -q "dev" 
-#BSUB -q "$class"
+#BSUB -q "devhigh"
 #BSUB -x  
 eofCAT
       if [[ -n $task_affinity ]]; then
@@ -75,6 +75,7 @@ module load ips/18.0.1.163
 module load prod_envir/1.0.3
 module load prod_util/1.1.0
 module load grib_util/1.1.1
+module load util_shared/1.1.1
 module load lsf/10.1    # loads blaunch)
 
 eofCAT
@@ -271,7 +272,7 @@ eofCAT
 #BSUB -n 1
 ##BSUB -q "hpc_ibm" 
 ##BSUB -q "dev" 
-#BSUB -q "dev_shared"
+#BSUB -q "devhigh"
 #BSUB -R "rusage[mem=250]"
 #BSUB -R affinity[core]
 ##BSUB -L /bin/ksh

@@ -79,7 +79,7 @@ if [[ $LOGNAME = glopara ]]; then
   export group=devonprod
   export classs=1
   export classp=devhigh
-  export classp=dev
+  #export classp=dev
 else
   echo
   echo directory locations for running in $LOGNAME account
@@ -165,6 +165,7 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
   export PTMP=/gpfs/dell3/ptmp
   export STMP=/gpfs/dell3/stmp
   group=emc/modeling
+  group=emc/retros
   group=`pwd|cut -d'/' -f2`
   export basesource=/gpfs/dell2/$group/noscrub/$LOGNAME/WCOSS/$expid
   export baseoutput=$PTMP/$LOGNAME/o/$expid
@@ -180,6 +181,7 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
 # export TMPCOM=/com_p6
 # export TMPCOM=/com
   export TMPCOM=/gpfs/dell1/nco/ops/com
+#exit
 fi
 #For WCOSS end
 
@@ -214,9 +216,9 @@ if [[ $machl = t ]] || [[ $machl = g ]]; then
   export group=ensemble
   # RLW 20140903 modify selected settings for emc.enspara on WCOSS
   if [[ "$LOGNAME" = "emc.enspara" ]]; then
-    userin="Richard.Wobus"
+    userin="Xianwu.Xue"
     userout="emc.enspara"
-    usergfs="Richard.Wobus"
+    usergfs="Xianwu.Xue"
     zq_setbase_hh=`date +%H`
     echo zq_setbase_hh=$zq_setbase_hh
     zq_setbase_runhigh=no      # default
@@ -268,11 +270,12 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
 # For DELL
   export account=GEN-T2O
   export group=emc/modeling
+  export group=emc/retros
   # RLW 20140903 modify selected settings for emc.enspara on WCOSS
   if [[ "$LOGNAME" = "emc.enspara" ]]; then
-    userin="Richard.Wobus"
+    userin="Xianwu.Xue"
     userout="emc.enspara"
-    usergfs="Richard.Wobus"
+    usergfs="Xianwu.Xue"
     zq_setbase_hh=`date +%H`
     echo zq_setbase_hh=$zq_setbase_hh
     zq_setbase_runhigh=no      # default
@@ -292,7 +295,7 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
     fi
     echo zq_setbase_runhigh=$zq_setbase_runhigh
     if [[ "$zq_setbase_runhigh" =  "yes" ]]; then
-      export classs=devhigh_shared
+      export classs=devhigh #_shared
       export classp=devhigh
     else
       export classs=dev_shared
@@ -306,9 +309,10 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
     export classp=dev
   fi
   # RLW 20141008 modify to obtain and use version for vertical structure
-  . /gpfs/dell2/$group/noscrub/$userin/s/$expid/nw$envir/gefs_legacy.v*/versions/gefs_legacy.ver
+  #. /gpfs/dell2/$group/noscrub/$userin/s/$expid/nw$envir/gefs_legacy.v*/versions/gefs_legacy.ver
+  . /gpfs/dell2/emc/verification/noscrub/emc.enspara/Xianwu.Xue/GEFS_LEGACY/TDHF/nwdev/gefs_legacy.v10.5.1/versions/gefs_legacy.ver
   echo gefs_legacy_ver=${gefs_legacy_ver}
-  export basesource=/gpfs/dell2/$group/noscrub/$userin/s/$expid
+  export basesource=/gpfs/dell2/emc/verification/noscrub/emc.enspara/Xianwu.Xue/GEFS_LEGACY/TDHF #/gpfs/dell2/$group/noscrub/$userin/s/$expid
   export basebin=$basesource/nw$envir/gefs_legacy.${gefs_legacy_ver}/control
   export baseoutput=$PTMP/$userout/o/$expid
   export basetmp=$STMP/$userout/o/$expid
