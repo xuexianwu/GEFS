@@ -13,7 +13,7 @@ OBJS=	 grbit2.o  wave_stat.o
 #
 #----- used with XLF on AIX  ---
 FC =            ifort
-FFLAGS =        -O -xHost -list -auto -I $(INC)
+FFLAGS =        -O -xHost -list -auto $(DEBUG) -I $(INC)
 #----- used with G95 on Linux ---
 #FC =           g95
 #FFLAGS =        $(INC)

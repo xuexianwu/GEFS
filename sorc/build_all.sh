@@ -14,6 +14,7 @@ if [ ! -d "../exec" ]; then
   mkdir ../exec
 fi
 
+export debug=${debug:-YES} # YES, NO
 #------------------------------------
 # INCLUDE PARTIAL BUILD 
 #------------------------------------

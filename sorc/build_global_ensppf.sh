@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 set -eux
 
+debug=${debug:-NO} # YES, NO
+
 source ./machine-setup.sh
 cwd=`pwd`
 
@@ -22,7 +24,15 @@ cd ${progname}.fd
 export FCMP=${FCMP:-ifort}
 export FCMP95=$FCMP
 
-export FFLAGSM="-O3 -convert big_endian"
+if [ $debug = YES ] ; then
+    export FFLAGSM="-O0 -convert big_endian"
+    export DEBUG="-g -check all -ftrapuv -fp-stack-check -fstack-protector -heap-arrays -recursive -traceback"
+else
+    export FFLAGSM="-O3 -convert big_endian"
+    export DEBUG=""
+fi
+export FFLAGSM="${FFLAGSM} ${DEBUG}" 
+#export FFLAGSM="-O3 -convert big_endian"
 export RECURS=
 export LDFLAGSM=${LDFLAGSM:-""}
 export OMPFLAGM=${OMPFLAGM:-""}

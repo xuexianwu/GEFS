@@ -11,6 +11,8 @@ set -eux
 #
 # --------------------------------------------------------------------------- #
 
+debug=${debug:-NO} # YES, NO
+
 source ./machine-setup.sh
 cwd=`pwd`
 
@@ -25,6 +27,15 @@ source ../modulefiles/gefs/${progname}.$target
 if [ ! -d "../exec" ]; then
   mkdir ../exec
 fi
+
+if [ $debug = YES ] ; then
+    #export FFLAGSM="-O0 -convert big_endian"
+    export DEBUG="-g -check all -ftrapuv -fp-stack-check -fstack-protector -heap-arrays -recursive -traceback"
+else
+    #export FFLAGSM="-O3 -convert big_endian"
+    export DEBUG=""
+fi
+#export FFLAGSM="${FFLAGSM} ${DEBUG}"
 
 #
 cd ${progname}.fd
