@@ -14,28 +14,8 @@ echo
 NDATE=${NDATE:-/gpfs/dell1/nco/ops/nwprod/prod_util.v1.1.1/exec/ips/ndate}
 #DHOU, 01/03/2013 add this block to generate the machine name related variables
   machl=`uname -n | cut -c1`
-  if [[ $machl = r ]]; then
-      machl=f
-  fi
-#DHOU, 12/17/2013, define PTMP to pointing to /ptmp or /ptmpd2
-if [[ $machl = t ]] || [[ $machl = g ]]; then
-# PTMP=ptmp
-# STMP=stmp
-  PTMP=/ptmpd2
-  STMP=/stmpd2
-
-  envir=$(basename $(dirname $(dirname $(pwd) ) ) | cut -c3-)
-  echo envir=$envir
-
-  expid=$(basename $(dirname $(dirname $(dirname $(pwd) ) ) ) )
-  id=`echo $expid|cut -c3-4`
-  echo expid=$expid
-  echo id=$id
-fi
 
 if [[ $machl = v ]] || [[ $machl = m ]]; then
-# PTMP=ptmp
-# STMP=stmp
   PTMP=/gpfs/dell3/ptmp
   STMP=/gpfs/dell3/stmp
 
@@ -55,33 +35,6 @@ echo
 echo `date` $0 set directory tree locations
 echo
 
-if [[ $LOGNAME = glopara ]]; then
-  echo
-  echo directory locations for running in glopara account
-  echo using codes and scripts in $LOGNAME account
-  echo
-  export PTMP=/ptmpd2
-  export STMP=/stmpd2
-
-  export basesource=/global/save/wx20rw/s/$expid
-  export baseoutput=$PTMP/$LOGNAME/para_gefs/o/$expid
-
-  export basetmp=$STMP/$LOGNAME/para_gefs/o/$expid
-  export baseptmp=$PTMP/$LOGNAME/para_gefs/o/$expid
-  export basebin=$basesource/nw$envir/control
-
-  export baselog=/global/noscrub/$LOGNAME/para_gefs/o/$expid
-  export basedgfs=/global/noscrub/$LOGNAME/para_gefs/o/$expid
-  export basedgens=$PTMP/$LOGNAME/para_gefs/o
-  export baseinitarch=/global/mirror/$LOGNAME/para_gefs/o/$expid
-
-  export account=GEN-T2O
-  export group=devonprod
-  export classs=1
-  export classp=devhigh
-  export classp=dev
-else
-  echo
   echo directory locations for running in $LOGNAME account
   echo
 
@@ -90,19 +43,6 @@ else
   export basetmp=/ptmp/$LOGNAME/o/$expid
   export baseptmp=/ptmp/$LOGNAME/o/$expid
 
-# For VAPOR
-# PTMP=/ptmp/$LOGNAME/tskh
-# PTMP=/gpfs/v3/benchmark/wx15dp/wx20dh/tskh
-# PGFS=/gpfs/v/mtb/noscrub/$LOGNAME/TSKH/GFS
-
-# export basesource=/gpfs/v/mtb/save/$LOGNAME/tskh/$expid
-# export baseoutput=$PTMP/o/$expid
-# For VAPOR end
-
-# For VAPOR
-# export basetmp=$PTMP/o/$expid
-# export baseptmp=$PTMP/o/$expid
-# For VAPOR end
   export basebin=$basesource/nw$envir/control
 
   export baselog=/ptmp/$LOGNAME/o/$expid
@@ -110,57 +50,7 @@ else
   export basedgens=/ptmp/$LOGNAME/o
   export baseinitarch=/global/mirror/$LOGNAME/o/$expid
 
-# For VAPOR
-# export baselog=$PTMP/o/$expid
-# export basedgfs=$PGFS/o
-# export basedgens=$PTMP/o
-# For VAPOR end
-
-#For ZEUS
-if [[ $machl = f ]]; then
-  ZENS=/scratch1/portfolios/NCEPDEV/ensemble
-  ZPTP=/scratch2/portfolios/NCEPDEV/ptmp
-  ZGFS=$ZENS/noscrub
-  export basenwges=$ZGFS/$LOGNAME/NWGES
-
-  export basesource=$ZENS/save/$LOGNAME/GEFS/$expid
-  export baseoutput=$ZPTP/$LOGNAME/o/$expid
-  export basebin=$basesource/nw$envir/control
-  PTMP=$ZPTP/$LOGNAME
-  PGFS=$ZGFS/$LOGNAME/GEFS/GFS
-
-  export basetmp=$PTMP/o/$expid
-  export baseptmp=$PTMP/o/$expid
-
-  export baselog=$PTMP/o/$expid
-  export basedgfs=$PGFS/o
-  export basedgens=$PTMP/o
-fi
-#For ZEUS end
-
-#For WCOSS 
-if [[ $machl = t ]] || [[ $machl = g ]]; then
-  export PTMP=/ptmpd2
-  export STMP=/stmpd2
-  group=ensemble
-  group=`pwd|cut -d'/' -f2`
-  export basesource=/$group/save/$LOGNAME/WCOSS/$expid
-  export baseoutput=$PTMP/$LOGNAME/o/$expid
-  export basetmp=$STMP/$LOGNAME/o/$expid
-  export baseptmp=$PTMP/$LOGNAME/o/$expid
-  export baselog=$PTMP/$LOGNAME/o/$expid
-# export basedgfs=/$group/noscrub/$LOGNAME/o
-# export basedgfs=
-  export basedgfs=/ensemble/noscrub/$LOGNAME  #Use this line as alternative when gfs data is missing from /com_p6/
-# MISSINGGFS!!! see above line
-
-# export TMPCOM=/com_canned
-# export TMPCOM=/com_p6
-# export TMPCOM=/com
-  export TMPCOM=/com2
-fi
-#For WCOSS end
-#For iDELL
+#For DELL
 if [[ $machl = v ]] || [[ $machl = m ]]; then
   export PTMP=/gpfs/dell3/ptmp
   export STMP=/gpfs/dell3/stmp
@@ -172,18 +62,10 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
   export basetmp=$STMP/$LOGNAME/o/$expid
   export baseptmp=$PTMP/$LOGNAME/o/$expid
   export baselog=$PTMP/$LOGNAME/o/$expid
-# export basedgfs=/$group/noscrub/$LOGNAME/o
-# export basedgfs=
-  export basedgfs=/gpfs/dell2/$group/noscrub/$LOGNAME  #Use this line as alternative when gfs data is missing from /com_p6/
-# MISSINGGFS!!! see above line
-
-# export TMPCOM=/com_canned
-# export TMPCOM=/com_p6
-# export TMPCOM=/com
-  export TMPCOM=/gpfs/dell1/nco/ops/com
-#exit
+  export basedgfs=
+ #exit
 fi
-#For WCOSS end
+#For DELL end
 
   export account=GEN-T2O
   export group=g01
@@ -191,89 +73,14 @@ fi
   export classs=1
   export classp=devhigh
   export classp=dev
-# For VAPOR
-# export account=MTB001-RES
-# export group=mtb
-# export classs=1
-# export classp=mtb
-# export classp=mtb
-# For VAPOR end
-
-if [[ $machl = f ]]; then
-# For ZEUS
-  export account=gefs
-  export group=ensemble
-  export classs=batch
-  export classp=batch
-  export classp=batch
-  export NWPROD=/scratch1/portfolios/NCEPDEV/ensemble/save/wx20dh/nwzeus
-# For ZEUS end
-fi  
-
-if [[ $machl = t ]] || [[ $machl = g ]]; then
-# For WCOSS
-  export account=GEN-T2O
-  export group=ensemble
-  # RLW 20140903 modify selected settings for emc.enspara on WCOSS
-  if [[ "$LOGNAME" = "emc.enspara" ]]; then
-    userin="Xianwu.Xue"
-    userout="emc.enspara"
-    usergfs="Xianwu.Xue"
-    zq_setbase_hh=`date +%H`
-    echo zq_setbase_hh=$zq_setbase_hh
-    zq_setbase_runhigh=no      # default
-    zq_setbase_runhigh=yes
-    if (( zq_setbase_hh > 23 )) || (( zq_setbase_hh < 10 )) ; then
-      zq_setbase_runhigh=no
-      zq_setbase_runhigh=yes   # default
-      zq_setbase_testc=`date +%Y%m%d`
-      zq_setbase_testc=`$NDATE -24`
-      echo zq_setbase_testc=$zq_setbase_testc
-      zq_setbase_testj=`echo ${LSB_JOBNAME}333333333333 | cut -c3-12`
-      echo zq_setbase_testj=$zq_setbase_testj
-      if [[ "$zq_setbase_testj" > "$zq_setbase_testc" ]]; then
-        zq_setbase_runhigh=no  # default
-        zq_setbase_runhigh=yes
-      fi
-    fi
-    echo zq_setbase_runhigh=$zq_setbase_runhigh
-    if [[ "$zq_setbase_runhigh" =  "yes" ]]; then
-      export classs=devhigh_shared
-      export classp=devhigh
-    else
-      export classs=dev_shared
-      export classp=dev
-    fi
-  else
-    userin=$LOGNAME
-    userout=$LOGNAME
-    usergfs="Xianwu.Xue"
-    export classs=dev_shared
-    export classp=dev
-  fi
-  # RLW 20141008 modify to obtain and use version for vertical structure
-  . /$group/save/$userin/s/$expid/nw$envir/gefs_legacy.v*/versions/gefs_legacy.ver
-  echo gefs_legacy_ver=${gefs_legacy_ver}
-  export basesource=/$group/save/$userin/s/$expid
-  export basebin=$basesource/nw$envir/gefs_legacy.${gefs_legacy_ver}/control
-  export baseoutput=$PTMP/$userout/o/$expid
-  export basetmp=$STMP/$userout/o/$expid
-  export baseptmp=$PTMP/$userout/o/$expid
-  export basedgfs=/$group/noscrub/$usergfs/o
-# RLW 20141010 use NCO parallel/prod for gfs testing
-  export basedgfs=
-  export basewait=$baseoutput/wait
-# For WCOSS end
-fi
 
 if [[ $machl = v ]] || [[ $machl = m ]]; then
 # For DELL
   export account=GEN-T2O
   #export group=emc/modeling
-  #export group=emc/retros
-  export group=emc/verification
   # RLW 20140903 modify selected settings for emc.enspara on WCOSS
   if [[ "$LOGNAME" = "emc.enspara" ]]; then
+    export group=emc/verification
     userin="emc.enspara/Xianwu.Xue"
     userout="emc.enspara"
     usergfs="Xianwu.Xue"
@@ -303,9 +110,10 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
       export classp=dev
     fi
   else
+    export group=emc/retros
     userin=$LOGNAME
     userout=$LOGNAME
-    usergfs="Xianwu.Xue"
+    usergfs=$LOGNAME
     export classs=dev_shared
     export classp=dev
   fi
@@ -320,13 +128,11 @@ if [[ $machl = v ]] || [[ $machl = m ]]; then
   export baseptmp=$PTMP/$userout/o/$expid
   export basedgfs=/$group/noscrub/$usergfs/o
 # RLW 20141010 use NCO parallel/prod for gfs testing
-  export basedgfs=
-  export basedgfs=/gpfs/td1/emc/ensemble/noscrub/$usergfs/o
+  export basedgfs=     # important to keep this line unchanged.----- Dingchen 20210202
+  #export basedgfs=/gpfs/td1/emc/ensemble/noscrub/$usergfs/o
   export basewait=$baseoutput/wait
 # For DELL end
 fi  
-
-fi
 
 echo
 echo basesource=$basesource
