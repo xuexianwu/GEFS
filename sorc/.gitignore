@@ -2,3 +2,6 @@
 logs/
 global-workflow.fd
 
+
+build_gsd_prep_chem.sh
+gsd_prep_chem.fd
