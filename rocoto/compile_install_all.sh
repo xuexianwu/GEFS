@@ -190,9 +190,9 @@ if [ $RunRocoto = "yes" ]; then
     cd $sWS
     if [ $machine = "hera" ]; then
         module load intel/18.0.5.274
-        module load rocoto/1.3.1
+        module load rocoto/1.3.3
         module load contrib
-        module load intelpython/3.6.8
+        module load anaconda/latest #intelpython/3.6.8
  
     elif [ $machine = "cray" ]; then
         . /opt/modules/3.2.10.3/init/sh
