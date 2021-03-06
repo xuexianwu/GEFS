@@ -65,6 +65,12 @@ if [[ $GFSArchivedData == "yes" ]]; then
 
 		export COMINcfs_base=${HOMEdata}/com/cfs/prod/cfs/cfs.
 
+        # For gempak_meta
+        export COMINsgfs=${HOMEdata}/com/gfs/prod #${COMINsgfs:-$(compath.py gfs/prod)}
+        export COMINnawips="NONE" #${COMINnawips:-$(compath.py nawips/prod)}
+        export COMINecmwf="NONE" #${COMINecmwf:-$(compath.py ecmwf/prod/ecmwf)}
+        export COMINukmet="NONE"  #${COMINukmet:-$(compath.py nawips/prod/ukmet)}
+        export COMINnam="NONE" #${COMINnam:-$(compath.py nam/prod)}
 	else
 		export COMINenkf_base=$HOMEdata/fv3init/enkf.gdas.
 		export COMINgfs_base=$HOMEdata/fv3init/gfs.

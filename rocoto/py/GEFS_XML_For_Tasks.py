@@ -1333,13 +1333,15 @@ def calc_gempak_resources(dicBase):
     elif WHERE_AM_I.upper() == "HERA":
         if (npert + 1) <= ncores_per_node:
             iNodes = nGEMPAK_RES
-            iPPN = (npert + 1)
-        elif nGEMPAK_RES <= ncores_per_node:
-            iNodes = (npert + 1)
-            iPPN = nGEMPAK_RES
+            iPPN = (npert + 1 + 2)
+        #elif nGEMPAK_RES <= ncores_per_node:
+        #    iNodes = (npert + 1 + 2)
+        #    iPPN = nGEMPAK_RES
         else:
-            iNodes = (npert + 1)
-            iPPN = nGEMPAK_RES
+            #iNodes = (npert + 1 + 2)
+            #iPPN = nGEMPAK_RES
+            iPPN = ncores_per_node
+            iNodes = math.ceil(iTotal_Tasks / (iPPN * 1.0))
 
     elif WHERE_AM_I.upper() in ["wcoss_dell_p3".upper(), "wcoss_dell_p35".upper()]:
         if (npert + 1) <= ncores_per_node:

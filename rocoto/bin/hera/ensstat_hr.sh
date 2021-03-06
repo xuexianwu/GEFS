@@ -52,5 +52,5 @@ export MEMORY_AFFINITY=core:4
 # export for development runs only begin
 
 # CALL executable job script here
-. $SOURCEDIR/jobs/JGEFS_ATMOS_ENSSTAT
+$SOURCEDIR/jobs/JGEFS_ATMOS_ENSSTAT
 

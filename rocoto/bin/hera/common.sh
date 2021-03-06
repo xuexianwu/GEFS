@@ -30,7 +30,8 @@ export taskspernode=${GEFS_PPN}
 #export NTASKS=${GEFS_NTASKS}
 
 #\/ Only on Hera
-export outid="LL$job"
+export pid=${pid:-${SLURM_JOBID}}
+export outid="$job"
 export jobid="${outid}.o${pid}"
 export pgmout="OUTPUT.${pid}"
 export LSB_JOBID=${pid}
