@@ -70,8 +70,13 @@ for config in $configs; do
     [[ $status -ne 0 ]] && exit $status
 done
 
-export RUNDIR=$WORKDIR/tmpnwprd/gefs.$PDY/$cyc
-export ICSDIR=$COMROOT/gens/dev/gefs.$PDY/$cyc
+export jobid=${jobid:-"$job.$LSB_JOBID"}
+export GESOUT=$GESROOT/${envir}/${RUN}.${PDY}/$cyc
+
+export DATA=${DATA:-${DATAROOT}/${jobid}}
+
+export RUNDIR=${DATA} #$WORKDIR/tmpnwprd/gefs.$PDY/$cyc
+export ICSDIR=${GESOUT}/init #$COMROOT/gens/dev/gefs.$PDY/$cyc
 export ROTDIR=$RUNDIR
 export DATAROOT=$RUNDIR
 mkdir -p $ICSDIR
@@ -98,33 +103,33 @@ for mem in $MEMLIST
 do
 
     # Create ICSDIR if needed
-    [[ ! -d $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT ]] && mkdir -p $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
-    [[ ! -d $ICSDIR/$mem/FV3ICS/ocn ]] && mkdir -p $ICSDIR/$mem/FV3ICS/ocn
-    [[ ! -d $ICSDIR/$mem/FV3ICS/ice ]] && mkdir -p $ICSDIR/$mem/FV3ICS/ice
+    [[ ! -d $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT ]] && mkdir -p $ICSDIR/$mem/gfs/$CASE/INPUT
+    [[ ! -d $ICSDIR/$mem/FV3ICS/ocn ]] && mkdir -p $ICSDIR/$mem/ocn
+    [[ ! -d $ICSDIR/$mem/FV3ICS/ice ]] && mkdir -p $ICSDIR/$mem/ice
 
     # Setup ATM initial condition files
     #cp -r $ORIGIN_ROOT/$CPL_ATMIC/$CDATE/$CDUMP  $ICSDIR/$CDATE/
-    cp -r $atminitdir/gefs.$PDY/$cyc/$mem/*  $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
+    cp -r $atminitdir/gefs.$PDY/$cyc/$mem/*  $ICSDIR/$mem/gfs/$CASE/INPUT
 
     # Setup Ocean IC files 
     #cp -r $ORIGIN_ROOT/$CPL_OCNIC/$CDATE/ocn/$OCNRES/MOM*.nc  $ICSDIR/$CDATE/ocn/
     #cp -r $cplinit/$CDATE/050/ocn  $ICSDIR/$mem/FV3ICS
-    cp -r $ocninitdir/$PDY/MOM4_TS_restart_regular.nc $ICSDIR/$mem/FV3ICS/ocn/MOM6_IC_TS.nc
+    cp -r $ocninitdir/$PDY/MOM4_TS_restart_regular.nc $ICSDIR/$mem/ocn/MOM6_IC_TS.nc
     #Setup Ice IC files 
     #cp $ORIGIN_ROOT/$CPL_ICEIC/$CDATE/ice/$ICERES/cice5_model_${ICERESdec}.res_$CDATE.nc $ICSDIR/$CDATE/ice/
     #cp -r $cplinit/$CDATE/050/ice $ICSDIR/$mem/FV3ICS
-    cp -r $iceinitdir/cice5_model_0.25.res_${CDATE}.nc $ICSDIR/$mem/FV3ICS/ice/cice5_model_0.25.res_${CDATE}.nc
+    cp -r $iceinitdir/cice5_model_0.25.res_${CDATE}.nc $ICSDIR/$mem/ice/cice5_model_0.25.res_${CDATE}.nc
     if [ $cplwav = ".true." ]; then
-        [[ ! -d $ICSDIR/$mem/FV3ICS/wav ]] && mkdir -p $ICSDIR/$mem/FV3ICS/wav
+        [[ ! -d $ICSDIR/$mem/FV3ICS/wav ]] && mkdir -p $ICSDIR/$mem/wav
         #  for grdID in $waveGRD
         #  do
         #cp $ORIGIN_ROOT/$CPL_WAVIC/$CDATE/wav/$grdID/*restart.$grdID $ICSDIR/$CDATE/wav/
-        cp -r $wavinitdir/${PDY}.000000.restart.gwes_30m $ICSDIR/$mem/FV3ICS/wav
+        cp -r $wavinitdir/${PDY}.000000.restart.gwes_30m $ICSDIR/$mem/wav
         #echo no wave initial data at this time
         #  done
     fi
 
-    export OUTDIR="$ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT"
+    export OUTDIR="$ICSDIR/$mem/gfs/$CASE/INPUT"
     mkdir -p $ICSDIR/ocndaily/$mem
     # Stage the FV3 initial conditions to ROTDIR
     memCOMOUT="$ROTDIR/$mem"
@@ -136,4 +141,14 @@ done
 
 ##############################################################
 # Exit cleanly
-exit 0
+#exit 0
+##############################
+# Remove the Temporary working directory
+##############################
+cd $DATAROOT
+if [ ${KEEPDATA:-NO} = NO ] ; then rm -rf $DATA ; fi
+
+echo "$(date -u) end $(basename $BASH_SOURCE)"
+
+exit $err
+
