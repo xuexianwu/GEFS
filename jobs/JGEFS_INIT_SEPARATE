@@ -241,7 +241,7 @@ if [[ $NEMSIO_IN = .true. ]]; then
     export COMINgfs=${COMINgfs:-$(compath.py gfs/prod/gfs.${PDY})/$cyc/atmos}
     export COMINgefs=${COMINgefs:-$(compath.py gefs/prod/gefs.$PDY)/$cyc/atmos/sfcsig}
   else
-    export COMPATH=/gpfs/dell1/nco/ops/com/gfs/para
+    # export COMPATH=/gpfs/dell1/nco/ops/com/gfs/para
     export COMINgfs=${COMINgfs:-$(compath.py gfs/prod/gfs.$PDY)/$cyc/atmos}
     export COMINgefs=${COMINgefs:-$(compath.py gefs/prod/gefs.$PDY)/$cyc/atmos/sfcsig}
   fi
