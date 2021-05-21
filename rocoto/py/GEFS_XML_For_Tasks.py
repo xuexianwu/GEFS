@@ -1396,6 +1396,7 @@ def get_metatask_names(taskname=""):
     metatask_names.append('prdgen_lr')
     # wave
     metatask_names.append('wave_prep')
+    metatask_names.append('cpl_wave_prep')
     metatask_names.append('wave_post')
     metatask_names.append('wave_gempak')
     # postsnd
