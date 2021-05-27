@@ -94,7 +94,7 @@ fi
 if [ $ICERES = '050' ]; then         
  ICERESdec="0.50"        
 fi 
-p5_025icdir=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p5_025ic
+p5_025icdir=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/cpls384_xxw/p5_025ic #/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p5_025ic
 atminitdir=$p5_025icdir/gfs
 ocninitdir=$p5_025icdir/ocn
 iceinitdir=$p5_025icdir/ice
