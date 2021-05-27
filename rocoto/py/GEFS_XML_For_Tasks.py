@@ -1397,6 +1397,11 @@ def get_metatask_names(taskname=""):
     # wave
     metatask_names.append('wave_prep')
     metatask_names.append('cpl_wave_prep')
+    metatask_names.append('cpl_fcst_med')
+    metatask_names.append('cpl_fcst_high')
+    metatask_names.append('cpl_ocn_post')
+    metatask_names.append('cpl_wav_post')
+
     metatask_names.append('wave_post')
     metatask_names.append('wave_gempak')
     # postsnd
