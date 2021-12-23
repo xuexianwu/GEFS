@@ -1472,6 +1472,13 @@ def get_metatask_names(taskname=""):
     # fcst_post_manageq
     metatask_names.append('fcst_post_manager')
 
+    # For cpl
+    metatask_names.append('cpl_wave_prep')
+    metatask_names.append('cpl_fcst_med')
+    metatask_names.append('cpl_fcst_high')
+    metatask_names.append('cpl_ocn_post')
+    metatask_names.append('cpl_wav_post')
+
     return metatask_names
 
 
