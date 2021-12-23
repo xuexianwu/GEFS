@@ -39,7 +39,7 @@ for config in $configs; do
 done
 
 export RUNDIR=$WORKDIR/tmpnwprd/gefs.$PDY/$cyc
-export ICSDIR=$COMROOT/gens/dev/gefs.$PDY/$cyc
+export ICSDIR=$COMROOT/gefs/dev/gefs.$PDY/$cyc
 export ROTDIR=$RUNDIR
 export DATAROOT=$RUNDIR
 mkdir -p $ICSDIR
@@ -52,10 +52,10 @@ status=$?
 [[ $status -ne 0 ]] && exit $status
 
 if [ $ICERES = '025' ]; then
-  ICERESdec="0.25"
+    ICERESdec="0.25"
 fi 
 if [ $ICERES = '050' ]; then         
- ICERESdec="0.50"        
+    ICERESdec="0.50"
 fi 
 icdir=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ic
 atminitdir=$icdir/gfs
@@ -65,41 +65,41 @@ wavinitdir=$icdir/wav
 for mem in $MEMLIST
 do
 
-# Create ICSDIR if needed
-[[ ! -d $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT ]] && mkdir -p $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
-[[ ! -d $ICSDIR/$mem/FV3ICS/ocn ]] && mkdir -p $ICSDIR/$mem/FV3ICS/ocn
-[[ ! -d $ICSDIR/$mem/FV3ICS/ice ]] && mkdir -p $ICSDIR/$mem/FV3ICS/ice
+    # Create ICSDIR if needed
+    [[ ! -d $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT ]] && mkdir -p $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
+    [[ ! -d $ICSDIR/$mem/FV3ICS/ocn ]] && mkdir -p $ICSDIR/$mem/FV3ICS/ocn
+    [[ ! -d $ICSDIR/$mem/FV3ICS/ice ]] && mkdir -p $ICSDIR/$mem/FV3ICS/ice
 
-# Setup ATM initial condition files
-#cp -r $ORIGIN_ROOT/$CPL_ATMIC/$CDATE/$CDUMP  $ICSDIR/$CDATE/
-cp -r $atminitdir/gefs.$PDY/$cyc/$mem/*  $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
+    # Setup ATM initial condition files
+    #cp -r $ORIGIN_ROOT/$CPL_ATMIC/$CDATE/$CDUMP  $ICSDIR/$CDATE/
+    cp -r $atminitdir/gefs.$PDY/$cyc/$mem/*  $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
 
-# Setup Ocean IC files 
-#cp -r $ORIGIN_ROOT/$CPL_OCNIC/$CDATE/ocn/$OCNRES/MOM*.nc  $ICSDIR/$CDATE/ocn/
-#cp -r $cplinit/$CDATE/050/ocn  $ICSDIR/$mem/FV3ICS
-cp -r $ocninitdir/$PDY/MOM4_TS_restart_regular.nc $ICSDIR/$mem/FV3ICS/ocn/MOM6_IC_TS.nc
-#Setup Ice IC files 
-#cp $ORIGIN_ROOT/$CPL_ICEIC/$CDATE/ice/$ICERES/cice5_model_${ICERESdec}.res_$CDATE.nc $ICSDIR/$CDATE/ice/
-#cp -r $cplinit/$CDATE/050/ice $ICSDIR/$mem/FV3ICS
-cp -r $iceinitdir/cice5_model_0.25.res_${CDATE}.nc $ICSDIR/$mem/FV3ICS/ice/cice5_model_0.25.res_${CDATE}.nc
-if [ $cplwav = ".true." ]; then
-  [[ ! -d $ICSDIR/$mem/FV3ICS/wav ]] && mkdir -p $ICSDIR/$mem/FV3ICS/wav
-#  for grdID in $waveGRD
-#  do
-    #cp $ORIGIN_ROOT/$CPL_WAVIC/$CDATE/wav/$grdID/*restart.$grdID $ICSDIR/$CDATE/wav/
-    cp -r $wavinitdir/${PDY}.000000.restart.gwes_30m $ICSDIR/$mem/FV3ICS/wav
-#echo no wave initial data at this time
-#  done
-fi
+    # Setup Ocean IC files
+    #cp -r $ORIGIN_ROOT/$CPL_OCNIC/$CDATE/ocn/$OCNRES/MOM*.nc  $ICSDIR/$CDATE/ocn/
+    #cp -r $cplinit/$CDATE/050/ocn  $ICSDIR/$mem/FV3ICS
+    cp -r $ocninitdir/$PDY/MOM4_TS_restart_regular.nc $ICSDIR/$mem/FV3ICS/ocn/MOM6_IC_TS.nc
+    #Setup Ice IC files
+    #cp $ORIGIN_ROOT/$CPL_ICEIC/$CDATE/ice/$ICERES/cice5_model_${ICERESdec}.res_$CDATE.nc $ICSDIR/$CDATE/ice/
+    #cp -r $cplinit/$CDATE/050/ice $ICSDIR/$mem/FV3ICS
+    cp -r $iceinitdir/cice5_model_0.25.res_${CDATE}.nc $ICSDIR/$mem/FV3ICS/ice/cice5_model_0.25.res_${CDATE}.nc
+    if [ $cplwav = ".true." ]; then
+        [[ ! -d $ICSDIR/$mem/FV3ICS/wav ]] && mkdir -p $ICSDIR/$mem/FV3ICS/wav
+        #  for grdID in $waveGRD
+        #  do
+        #cp $ORIGIN_ROOT/$CPL_WAVIC/$CDATE/wav/$grdID/*restart.$grdID $ICSDIR/$CDATE/wav/
+        cp -r $wavinitdir/${PDY}.000000.restart.gwes_30m $ICSDIR/$mem/FV3ICS/wav
+        #echo no wave initial data at this time
+        #  done
+    fi
 
-export OUTDIR="$ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT"
-mkdir -p $ICSDIR/ocndaily/$mem
-# Stage the FV3 initial conditions to ROTDIR
-memCOMOUT="$ROTDIR/$mem"
-[[ ! -d $memCOMOUT ]] && mkdir -p $memCOMOUT
-cd $memCOMOUT || exit 99
-rm -rf INPUT
-#$NLN $OUTDIR .
+    export OUTDIR="$ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT"
+    mkdir -p $ICSDIR/ocndaily/$mem
+    # Stage the FV3 initial conditions to ROTDIR
+    memCOMOUT="$ROTDIR/$mem"
+    [[ ! -d $memCOMOUT ]] && mkdir -p $memCOMOUT
+    cd $memCOMOUT || exit 99
+    rm -rf INPUT
+    #$NLN $OUTDIR .
 done
 
 ##############################################################
