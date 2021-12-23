@@ -1,0 +1,79 @@
+# This file is used by the downstream product generation.  That
+# includes all steps of product generation after the post master file
+# and lat-lon files are created.  For example, the tracker, VSDB, and
+# AWIPS files.  These are not included in this release, so this file
+# should be left unmodified.  These variables must still be defined to
+# ensure validation logic elsewhere is satisfied.
+
+downstream_schema: &downstream_schema !Template
+  VDUMP:
+    type: string
+    description: verifying dump
+  CDUMPFCST:
+    type: string
+    description: Fit-to-obs with GDAS/GFS prepbufr
+  CDFNL:
+    type: string
+    description: Scores verification against GDAS/GFS analysis
+
+  MKPGB4PRCP:
+    type: bool
+    description: make 0.25-deg pgb files in ARCDIR for precip verification
+  VRFYFITS:
+    type: bool
+    description: "Fit to observations"
+  VSDB_STEP1:
+    type: bool
+    description: "populate VSDB database"
+  VSDB_STEP2:
+    type: bool
+  VRFYG2OBS:
+    type: bool
+    description: "Grid to observations, see note below if turning ON"
+  VRFYPRCP:
+    type: bool
+    description: "Precip threat scores"
+  VRFYRAD:
+    type: bool
+    description: "Radiance data assimilation monitoring"
+  VRFYOZN:
+    type: bool
+    description: "Ozone data assimilation monitoring"
+  VRFYMINMON:
+    type: bool
+    description: "GSI minimization monitoring"
+  VRFYTRAK:
+    type: bool
+    description: "Hurricane track verification"
+  VRFYGENESIS:
+    type: bool
+    description: "Cyclone genesis verification"
+  RUNMOS:
+    type: bool
+    description: "Run GFS MOS"
+  DO_POST_PROCESSING:
+    type: bool
+    description: "Run post processing tasks (BUFRSND, GEMPAK, AWIPS, FAX, WAFS, BULLETINS"
+  DO_BUFRSND:
+    type: bool
+    description: "Run GFS_POSTSND"
+  DO_GEMPAK:
+    type: bool
+    description: "Run GEMPAK"
+  DO_AWIPS:
+    type: bool
+    description: "Run AWIPS"
+  DO_FAX:
+    type: bool
+    description: "Run FAX"
+  DO_WAFS:
+    type: bool
+    description: "Run WAFS"
+  DO_BULLETINS:
+    type: bool
+    description: "Run BULLETINS"
+  
+  FHOUT_CYCLONE_GFS:
+    type: int
+  FHOUT_CYCLONE_GDAS:
+    type: int
