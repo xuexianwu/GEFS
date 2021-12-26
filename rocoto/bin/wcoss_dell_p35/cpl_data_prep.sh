@@ -20,6 +20,9 @@ set -x
 #export RUNDIR=$WORKDIR/tmpnwprd
 #export EXPDIR=/scratch2/NCEPDEV/ensemble/Bing.Fu/p5/test050
 #export BASE_ENV=$HOMEgfs/env
+
+. $GEFS_ROCOTO/bin/wcoss_dell_p35/common.sh
+
 export CDATE=${PDY}00
 
 . $HOMEgfs/ush/load_fv3gfs_modules.sh

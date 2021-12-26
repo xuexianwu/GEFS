@@ -169,7 +169,8 @@ def create_folders(dicBase):
     import datetime
     date1 = datetime.datetime.strptime(dicBase['SDATE'][0:8], "%Y%m%d")
     date2 = datetime.datetime.strptime(dicBase['EDATE'][0:8], "%Y%m%d")
-    day = datetime.timedelta(days=1)
+    # day = datetime.timedelta(days=1)
+    day = datetime.timedelta(hours=int(dicBase['INCYC']))
 
     while date1 <= date2:
         sPath1 = sPath + date1.strftime('%Y%m%d')

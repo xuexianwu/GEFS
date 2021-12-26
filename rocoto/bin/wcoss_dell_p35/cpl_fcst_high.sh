@@ -16,13 +16,16 @@ export NTHREADS_SIGCHGRS=2
 export OMP_NUM_THREADS=1
 export FORECAST_SEGMENT=hr
 
+. $GEFS_ROCOTO/bin/wcoss_dell_p35/common.sh
+export CDUMP="gfs"
+export RUN="gfs"
 export memdir_template='$ROTDIR/enkf.$CDUMP.$PDY/$cyc'
 . /usrx/local/prod/lmod/lmod/init/ksh
 module purge
 source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive
 module list
 export mem=`echo $RUNMEM|cut -c3-5`
-export RUNDIR=/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/tmpnwprd
+#export RUNDIR=/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/tmpnwprd
 export CDATE=${PDY}00
 # CALL executable job script here
 . /$EXPDIR/config.base

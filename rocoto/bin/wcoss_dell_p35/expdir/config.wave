@@ -116,10 +116,10 @@
   export NTASKS=12
   #
   # # Path to HOME Directory
-  export EXECwave="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/exec"
-  export FIXwave="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/fix/fix_wave"
-  export PARMwave="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/parm/wave"
-  export USHwave="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/ush"
+  export EXECwave="${HOMEgfs}/exec" #"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/exec"
+  export FIXwave="${HOMEgfs}/fix/fix_wave" #"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/fix/fix_wave"
+  export PARMwave="${HOMEgfs}/parm/wave" #"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/parm/wave"
+  export USHwave="${HOMEgfs}/ush" #"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/ush"
   #
   #
   echo "END: config.wave"

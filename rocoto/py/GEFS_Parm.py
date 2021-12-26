@@ -230,6 +230,24 @@ def create_gets_dev_parm(dicBase, listBaseParm):
         else:
             fh.write('export {0}="{1}"\n'.format(sVarName, dicBase[sVarName.upper()]))
 
+        if sVarName.upper() == 'DO_SKEB':
+            fh.write('export STO_EPBL=TRUE\n')
+            fh.write('export STO_OCNSPPT=TRUE\n')
+            fh.write('export pert_mp=".true."\n')
+            fh.write('export pert_radtend=".true."\n')
+            fh.write('\n')
+            fh.write('if [[ $RUNMEM = "gec00" ]]; then\n')
+            fh.write('    export DO_SPPT=".false."\n')
+            fh.write('    export DO_SHUM=".false."\n')
+            fh.write('    export DO_SKEB=".false."\n')
+            fh.write('    export DO_VC="NO"\n')
+            fh.write('    export STO_EPBL=False\n')
+            fh.write('    export STO_OCNSPPT=False\n')
+            fh.write('    export pert_mp=".false."\n')
+            fh.write('    export pert_radtend=".false."\n')
+            fh.write('fi # [[ $RUNMEM = "gec00" ]]\n')
+            #fh.write('\n')
+
     # fh.write(strings)
     fh.write("\necho $(date) $0 test section end\n")
     fh.flush()

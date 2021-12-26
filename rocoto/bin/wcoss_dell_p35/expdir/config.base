@@ -53,7 +53,7 @@ export QUEUE_ARCH="dev2_transfer"
 export HPSS_PROJECT=ensemble
 
 # Directories relative to installation areas:
-export HOMEgfs="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c"
+export HOMEgfs=${HOMEgfs:-"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c"}
 export PARMgfs=$HOMEgfs/parm
 export FIXgfs=$HOMEgfs/fix
 export USHgfs=$HOMEgfs/ush
@@ -69,11 +69,11 @@ export OCNFIXDIR=$HOMEgfs/fix/fix_reg2grb2
 export DMPDIR="/gpfs/dell3/emc/global/dump"
 export RTMFIX="$CRTM_FIX"
 
-export HOMEDIR="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c"
-export STMP="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/stmp"
-export PTMP="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/com"
-#export COMROOT="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/com"
-export NOSCRUB="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/com"
+export HOMEDIR=${HOMEgfs} #${HOMEDIR:-"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c"}
+export STMP=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/${EXPID}/stmp #${STMP:-"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/stmp"}
+export PTMP=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/${EXPID}/com #${PTMP:-"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/com"}
+export COMROOT="/gpfs/dell6/ptmp/Xianwu.Xue/o/${EXPID}/com" #"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/com"
+export NOSCRUB=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/${EXPID}/com #${NOSCRUB:-"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/com"}
 
 # Base directories for various builds
 export BASE_GIT="/gpfs/dell2/emc/modeling/noscrub/emc.glopara/git"
@@ -86,7 +86,7 @@ elif [ -d /gpfs/gp1 ]; then
     export SITE="VENUS"
 fi
 
-export POSTGRB2TBL="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/sorc/gfs_post.fd/parm/params_grib2_tbl_new"
+export POSTGRB2TBL="${HOMEgfs}/sorc/gfs_post.fd/parm/params_grib2_tbl_new" #"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/gw_p7c/sorc/gfs_post.fd/parm/params_grib2_tbl_new"
 
 # CCPP Configurations
 export CCPP_SUITE="FV3_GFS_v16_coupled_nsstNoahmp_p5gwd"
@@ -127,18 +127,18 @@ export BASE_ENV="$HOMEgfs/env"
 export BASE_JOB="$HOMEgfs/jobs/rocoto"
 
 # EXPERIMENT specific environment parameters
-export SDATE=2013040100
-export EDATE=2013040100
+export SDATE=${SDATE:-2013040100}
+export EDATE=${EDATE:-2013040100}
 export assim_freq=6
-export PSLOT="expdir"
-export EXPDIR="/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/expdir"
-export ROTDIR="/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/com/gens/dev/gefs.$PDY/00/$mem"
-export COMROOT="/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/com"
+export PSLOT=${PSLOT:-"expdir"}
+export EXPDIR=${EXPDIR:-"/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7ep2/expdir"}
+export ROTDIR="$COMROOT/gefs/dev/gefs.${PDY}/$cyc/$mem" #"/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/com/gens/dev/gefs.$PDY/00/$mem"
+#export COMROOT="/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/com"
 export ROTDIR_DUMP="YES"
 export DUMP_SUFFIX=""
-export RUNDIR="/gpfs/dell6/ptmp/Bing.Fu/o/p7ep2/stmp/gefs.$PDY/00/$mem"
+export RUNDIR="/gpfs/dell6/ptmp/Xianwu.Xue/o/${EXPID}/stmp/gefs.$PDY/00/$mem"
 export ARCDIR="$NOSCRUB/archive/$PSLOT"
-export ICSDIR="$COMROOT/gens/dev/gefs.$PDY/$cyc/$mem/FV3ICS"
+export ICSDIR="$COMROOT/gefs/dev/gefs.$PDY/$cyc/$mem/FV3ICS"
 export ATARDIR="/NCEPDEV/$HPSS_PROJECT/1year/$USER/$machine/scratch/$PSLOT"
 export OROFIX=""
 export GRDFIX=""
