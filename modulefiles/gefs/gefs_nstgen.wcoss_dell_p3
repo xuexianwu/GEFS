@@ -13,4 +13,4 @@ module load NetCDF/${NetCDF_ver}
 export FCMP=ifort
 export LDFLAGSM=
 export OMPFLAGM=
-
+export NETCDF_INCLUDES=$NETCDF_INC
