@@ -5,7 +5,7 @@ ulimit -s unlimited
 ulimit -a
 
 # module_ver.h
-. $SOURCEDIR/versions/gefs_wcoss_dell_p35.ver
+. $GEFS_ROCOTO/dev/versions/gefs_wcoss_dell_p35.ver
 
 # Load modules
 . /usrx/local/prod/lmod/lmod/init/ksh
@@ -33,6 +33,21 @@ module list
 
 # Export List
 #export RERUN=NO
+
+#export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/$cyc}
+#export COMOUT=${COMOUT:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/$cyc}
+#export COMINgfs=${COMINgfs:-$(compath.py gfs/prod/gfs.${PDY})/$cyc/atmos}
+mem=$(echo $RUNMEM|cut -c3-5)
+#export PBS_JOBID=$LSB_JOBID
+export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/$cyc/$mem/gfs.$PDY/$cyc}
+export COMOUT=${COMOUT:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/$cyc}
+export COMINgfs=${COMINgfs:-$(compath.py gfs/prod/gfs.${PDY})/$cyc/atmos}
+
+# Copy ocndaily data
+#cp ${COMOUT}/00/$mem/gfs.$PDY/00/*daily* $COMOUT/00/ocndaily/$mem
+#cp ${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/00/$mem/gfs.$PDY/00/*daily* $COMOUT/00/ocndaily/$mem
+#cp ${COMOUT}/$mem/gfs.$PDY/00/*daily* $COMOUT/ocndaily/$mem
+cp ${COMIN}/*daily* $COMOUT/ocndaily/$mem
 
 # CALL executable job script here
 $SOURCEDIR/jobs/JGEFS_ATMOS_PRDGEN
