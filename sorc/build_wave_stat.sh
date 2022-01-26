@@ -20,6 +20,10 @@ progname=wave_stat
 
 if [ -f ../modulefiles/gefs/gefs_$target.ver ]; then
     source ../modulefiles/gefs/gefs_$target.ver
+else
+    if [ -f ../versions/build.ver ]; then
+        source ../versions/build.ver
+    fi
 fi
 source ../modulefiles/gefs/${progname}.$target
 
@@ -35,10 +39,12 @@ else
     #export FFLAGSM="-O3 -convert big_endian"
     export DEBUG=""
 fi
-#export FFLAGSM="${FFLAGSM} ${DEBUG}"
+export FFLAGSM="${FFLAGSM} ${DEBUG}"
 
 #
 cd ${progname}.fd
+
+export FCMP=${FCMP:-ifort}
 
 make -f Makefile clobber
 make -f Makefile
