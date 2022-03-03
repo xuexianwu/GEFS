@@ -109,6 +109,12 @@ else
     echo "FATAL ERROR in ${.sh.file}: $job failed!"
     exit $err
 fi
+
+#memlist="p01 p02 p03 p04 p05 p06 p07 p08 p09 p10 c00"
+#for mem in $memlist
+#do
+#    cp $COMOUT/00/$mem/gfs.$PDY/00/*daily* $COMOUT/00/ocndaily/$mem
+#done
 #############################################################
 
 ##############################

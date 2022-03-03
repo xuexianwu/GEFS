@@ -124,8 +124,8 @@ while [[ $fh -le $FHOUR ]]; do
 	for res in lr; do
 		if [[ $res = lr ]]; then
 			EXT=
-			FXT=.2p50.
-			lr=2p5
+			FXT=a.2p50.
+			lr=a2p5
 			ext_h=$ext_h
 			nenspost=$nenspostlr
 			lfm=$lfmlr

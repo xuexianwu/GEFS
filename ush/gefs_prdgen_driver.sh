@@ -107,9 +107,14 @@ for hour in $hours; do
 			export mcfile=""
 			export makepgrb2b="no"
 		else
-			export mafile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2anl
-			export mifile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2ianl
-			export mcfile=$COMIN/$COMPONENT/misc/post/$RUNMEM.$cycle.master.control.anl
+			#export mafile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2anl
+			#export mifile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2ianl
+			#export mcfile=$COMIN/$COMPONENT/misc/post/$RUNMEM.$cycle.master.control.anl
+
+            # For cpls
+            export mafile=$COMIN/$COMPONENT/$RUNMEM.$cycle.master.grb2anl
+            export mifile=$COMIN/$COMPONENT/$RUNMEM.$cycle.master.grb2ianl
+            export mcfile=$COMIN/$COMPONENT/$RUNMEM.$cycle.master.grb2ianl #control.anl
 			if [[ -z "$pgbd" ]]; then
 				export makepgrb2b="no"
 			else
@@ -250,9 +255,14 @@ for hour in $hours; do
 		export mcfile=""
 		export makepgrb2b="no"
 	else 
-		export mafile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2f$fhr
-		export mifile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2if$fhr
-		export mcfile=$COMIN/$COMPONENT/misc/post/$RUNMEM.$cycle.master.control.f$fhr
+		#export mafile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2f$fhr
+		#export mifile=$COMIN/$COMPONENT/master/$RUNMEM.$cycle.master.grb2if$fhr
+		#export mcfile=$COMIN/$COMPONENT/misc/post/$RUNMEM.$cycle.master.control.f$fhr
+
+        # For cpls
+        export mafile=$COMIN/$COMPONENT/$RUNMEM.$cycle.master.grb2f$fhr
+        export mifile=$COMIN/$COMPONENT/$RUNMEM.$cycle.master.grb2f$fhr
+        export mcfile=$COMIN/$COMPONENT/$RUNMEM.$cycle.master.grb2f$fhr #control.f$fhr
 		if [[ -z "$pgbd" ]]; then
 			export makepgrb2b="no"
 		else
@@ -299,14 +309,15 @@ for hour in $hours; do
 		else # [[ $RUNMEM = "gegfs" ]]
 			# Check if control file has been created, to make sure file is complete before using
 			testfhr=-1
-			if [[ -f $mcfile ]]; then
-				teststring=$(cat $mcfile|head -1)
-				if [[ $teststring != '' ]]; then
-					if [[ -f $mifile ]]; then
-						testfhr=$(echo $teststring | cut -c11-13)
-					fi
-				fi # [[ $teststring != '' ]]
-			fi # [[ -f $mcfile ]]
+			#if [[ -f $mcfile ]]; then
+			#	teststring=$(cat $mcfile|head -1)
+			#	if [[ $teststring != '' ]]; then
+			#		if [[ -f $mifile ]]; then
+			#			testfhr=$(echo $teststring | cut -c11-13)
+			#		fi
+			#	fi # [[ $teststring != '' ]]
+			#fi # [[ -f $mcfile ]]
+            testfhr=999
 			echo "testfhr=$testfhr fhr=$fhr"
 
 			if (( testfhr >= fhr )); then
