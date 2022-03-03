@@ -1,6 +1,5 @@
 ############################# sorted pgrb2a + pgrb2b 201502
 :4LFTX:surface:
-:5WAVH:500 mb:
 :ABSV:1000 mb:
 :ABSV:100 mb:
 :ABSV:10 mb:
@@ -116,14 +115,6 @@
 :HGT:975 mb:
 :HGT:highest tropospheric freezing level:
 :HGT:max wind:
-:HGT:PV=-1.5e-06 (Km^2/kg/s) surface:
-:HGT:PV=1.5e-06 (Km^2/kg/s) surface:
-:HGT:PV=-1e-06 (Km^2/kg/s) surface:
-:HGT:PV=1e-06 (Km^2/kg/s) surface:
-:HGT:PV=-2e-06 (Km^2/kg/s) surface:
-:HGT:PV=2e-06 (Km^2/kg/s) surface:
-:HGT:PV=-5e-07 (Km^2/kg/s) surface:
-:HGT:PV=5e-07 (Km^2/kg/s) surface:
 :HGT:surface:
 :HGT:tropopause:
 :HINDEX:surface:
@@ -133,22 +124,9 @@
 :ICAHT:tropopause:
 :ICEC:surface:
 :ICETK:surface:
-:ICIP:300 mb:
-:ICIP:400 mb:
-:ICIP:500 mb:
-:ICIP:600 mb:
-:ICIP:700 mb:
-:ICIP:800 mb:
-:ICSEV:300 mb:
-:ICSEV:400 mb:
-:ICSEV:500 mb:
-:ICSEV:600 mb:
-:ICSEV:700 mb:
-:ICSEV:800 mb:
 :LAND:surface:
 :LFTX:surface:
 :LHTFL:surface:
-:MNTSF:320 K isentropic level:
 :MSLET:mean sea level:
 :NCPCP:surface:
 :O3MR:100 mb:
@@ -182,26 +160,11 @@
 :PRES:low cloud bottom level:
 :PRES:low cloud top level:
 :PRES:max wind:
-:PRES:mean sea level:
 :PRES:middle cloud bottom level:
 :PRES:middle cloud top level:
-:PRES:PV=-1.5e-06 (Km^2/kg/s) surface:
-:PRES:PV=1.5e-06 (Km^2/kg/s) surface:
-:PRES:PV=-1e-06 (Km^2/kg/s) surface:
-:PRES:PV=1e-06 (Km^2/kg/s) surface:
-:PRES:PV=-2e-06 (Km^2/kg/s) surface:
-:PRES:PV=2e-06 (Km^2/kg/s) surface:
-:PRES:PV=-5e-07 (Km^2/kg/s) surface:
-:PRES:PV=5e-07 (Km^2/kg/s) surface:
 :PRES:surface:
 :PRES:tropopause:
 :PRMSL:mean sea level:
-:PVORT:310 K isentropic level:
-:PVORT:320 K isentropic level:
-:PVORT:350 K isentropic level:
-:PVORT:450 K isentropic level:
-:PVORT:550 K isentropic level:
-:PVORT:650 K isentropic level:
 :PWAT:30-0 mb above ground:
 :PWAT:entire atmosphere (considered as a single layer):
 :RH:0.33-1 sigma layer:
@@ -302,9 +265,9 @@
 :TCDC:boundary layer cloud layer:
 :TCDC:convective cloud layer:
 :TCDC:entire atmosphere:
-:TCDC:high cloud layer:
-:TCDC:low cloud layer:
-:TCDC:middle cloud layer:
+:HCDC:high cloud layer:
+:LCDC:low cloud layer:
+:MCDC:middle cloud layer:
 :TMAX:2 m above ground:
 :TMIN:2 m above ground:
 :TMP:0.995 sigma level:
@@ -329,23 +292,19 @@
 :TMP:305 m above mean sea level:
 :TMP:30 mb:
 :TMP:3 mb:
-:TMP:320 K isentropic level:
 :TMP:350 mb:
 :TMP:3658 m above mean sea level:
 :TMP:400 mb:
-:TMP:450 K isentropic level:
 :TMP:450 mb:
 :TMP:4572 m above mean sea level:
 :TMP:457 m above mean sea level:
 :TMP:500 mb:
 :TMP:50 mb:
 :TMP:5 mb:
-:TMP:550 K isentropic level:
 :TMP:550 mb:
 :TMP:600 mb:
 :TMP:60-30 mb above ground:
 :TMP:610 m above mean sea level:
-:TMP:650 K isentropic level:
 :TMP:650 mb:
 :TMP:700 mb:
 :TMP:70 mb:
@@ -364,14 +323,6 @@
 :TMP:low cloud top level:
 :TMP:max wind:
 :TMP:middle cloud top level:
-:TMP:PV=-1.5e-06 (Km^2/kg/s) surface:
-:TMP:PV=1.5e-06 (Km^2/kg/s) surface:
-:TMP:PV=-1e-06 (Km^2/kg/s) surface:
-:TMP:PV=1e-06 (Km^2/kg/s) surface:
-:TMP:PV=-2e-06 (Km^2/kg/s) surface:
-:TMP:PV=2e-06 (Km^2/kg/s) surface:
-:TMP:PV=-5e-07 (Km^2/kg/s) surface:
-:TMP:PV=5e-07 (Km^2/kg/s) surface:
 :TMP:surface:
 :TMP:tropopause:
 :TOZNE:entire atmosphere (considered as a single layer):
@@ -402,23 +353,19 @@
 :UGRD:305 m above mean sea level:
 :UGRD:30 mb:
 :UGRD:3 mb:
-:UGRD:320 K isentropic level:
 :UGRD:350 mb:
 :UGRD:3658 m above mean sea level:
 :UGRD:400 mb:
-:UGRD:450 K isentropic level:
 :UGRD:450 mb:
 :UGRD:4572 m above mean sea level:
 :UGRD:457 m above mean sea level:
 :UGRD:500 mb:
 :UGRD:50 mb:
 :UGRD:5 mb:
-:UGRD:550 K isentropic level:
 :UGRD:550 mb:
 :UGRD:600 mb:
 :UGRD:60-30 mb above ground:
 :UGRD:610 m above mean sea level:
-:UGRD:650 K isentropic level:
 :UGRD:650 mb:
 :UGRD:700 mb:
 :UGRD:70 mb:
@@ -435,14 +382,6 @@
 :UGRD:975 mb:
 :UGRD:max wind:
 :UGRD:planetary boundary layer:
-:UGRD:PV=-1.5e-06 (Km^2/kg/s) surface:
-:UGRD:PV=1.5e-06 (Km^2/kg/s) surface:
-:UGRD:PV=-1e-06 (Km^2/kg/s) surface:
-:UGRD:PV=1e-06 (Km^2/kg/s) surface:
-:UGRD:PV=-2e-06 (Km^2/kg/s) surface:
-:UGRD:PV=2e-06 (Km^2/kg/s) surface:
-:UGRD:PV=-5e-07 (Km^2/kg/s) surface:
-:UGRD:PV=5e-07 (Km^2/kg/s) surface:
 :UGRD:tropopause:
 :U-GWD:surface:
 :ULWRF:surface:
@@ -474,23 +413,19 @@
 :VGRD:305 m above mean sea level:
 :VGRD:30 mb:
 :VGRD:3 mb:
-:VGRD:320 K isentropic level:
 :VGRD:350 mb:
 :VGRD:3658 m above mean sea level:
 :VGRD:400 mb:
-:VGRD:450 K isentropic level:
 :VGRD:450 mb:
 :VGRD:4572 m above mean sea level:
 :VGRD:457 m above mean sea level:
 :VGRD:500 mb:
 :VGRD:50 mb:
 :VGRD:5 mb:
-:VGRD:550 K isentropic level:
 :VGRD:550 mb:
 :VGRD:600 mb:
 :VGRD:60-30 mb above ground:
 :VGRD:610 m above mean sea level:
-:VGRD:650 K isentropic level:
 :VGRD:650 mb:
 :VGRD:700 mb:
 :VGRD:70 mb:
@@ -507,14 +442,6 @@
 :VGRD:975 mb:
 :VGRD:max wind:
 :VGRD:planetary boundary layer:
-:VGRD:PV=-1.5e-06 (Km^2/kg/s) surface:
-:VGRD:PV=1.5e-06 (Km^2/kg/s) surface:
-:VGRD:PV=-1e-06 (Km^2/kg/s) surface:
-:VGRD:PV=1e-06 (Km^2/kg/s) surface:
-:VGRD:PV=-2e-06 (Km^2/kg/s) surface:
-:VGRD:PV=2e-06 (Km^2/kg/s) surface:
-:VGRD:PV=-5e-07 (Km^2/kg/s) surface:
-:VGRD:PV=5e-07 (Km^2/kg/s) surface:
 :VGRD:tropopause:
 :V-GWD:surface:
 :VIS:surface:
@@ -552,14 +479,6 @@
 :VVEL:925 mb:
 :VVEL:950 mb:
 :VVEL:975 mb:
-:VWSH:PV=-1.5e-06 (Km^2/kg/s) surface:
-:VWSH:PV=1.5e-06 (Km^2/kg/s) surface:
-:VWSH:PV=-1e-06 (Km^2/kg/s) surface:
-:VWSH:PV=1e-06 (Km^2/kg/s) surface:
-:VWSH:PV=-2e-06 (Km^2/kg/s) surface:
-:VWSH:PV=2e-06 (Km^2/kg/s) surface:
-:VWSH:PV=-5e-07 (Km^2/kg/s) surface:
-:VWSH:PV=5e-07 (Km^2/kg/s) surface:
 :VWSH:tropopause:
 :WATR:surface:
 :WEASD:surface:
