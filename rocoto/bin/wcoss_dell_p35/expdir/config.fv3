@@ -28,20 +28,20 @@ case $forecast_mode in
           export DELTIM=300
           export OCNTIM=1800
           export ICETIM=300
-          export layout_x=12
+          export layout_x=16
           export layout_y=12
-          export layout_x_gfs=12
+          export layout_x_gfs=16
           export layout_y_gfs=12
           export npe_node_fcst=40
           export nth_fv3="1"
           export npe_fv3=576
-          #export cdmbgwd=1.1,0.72,1.0,1.0  
-          export cdmbgwd=1.0,1.2
+          export cdmbgwd=1.1,0.72,1.0,1.0
+#          export cdmbgwd=1.0,1.2,1.0,1.0
                    # mountain blocking and gravity wave drag
           export WRITE_GROUP=1
-          export WRTTASK_PER_GROUP=56
+          export WRTTASK_PER_GROUP=48
           export WRITE_GROUP_GFS=1
-          export WRTTASK_PER_GROUP_GFS=56
+          export WRTTASK_PER_GROUP_GFS=48
           export WRTIOBUF=32M
           ;;
     "GDAS")
