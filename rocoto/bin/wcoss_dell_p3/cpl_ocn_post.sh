@@ -95,7 +95,7 @@ else
     #export COMIN="$ROTDIR/$CDUMP.$PDY/$cyc"
     #export COMOUT="$ROTDIR/$CDUMP.$PDY/$cyc"
 
-    export COMIN="$COMROOT/gens/dev/gefs.${PDY}/$cyc/$mem/$CDUMP.$PDY/$cyc"
+    export COMIN="$COMROOT/gefs/dev/gefs.${PDY}/$cyc/$mem/$CDUMP.$PDY/$cyc"
     export COMOUT=$COMIN
 fi
 [[ ! -d $COMOUT ]] && mkdir -m 775 -p $COMOUT

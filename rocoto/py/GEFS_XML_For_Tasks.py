@@ -292,7 +292,7 @@ def create_metatask_task(dicBase, taskname="atmos_prep", sPre="\t", GenTaskEnt=F
     elif taskname == "avg_gempak_vgf":
         cycledef = "gefs_00z,gefs_12z"
 
-    maxtries = 1
+    maxtries = 2
 
     strings = ""
 

@@ -91,6 +91,9 @@ do
         #  do
         #cp $ORIGIN_ROOT/$CPL_WAVIC/$CDATE/wav/$grdID/*restart.$grdID $ICSDIR/$CDATE/wav/
         cp -r $wavinitdir/${PDY}.000000.restart.gwes_30m $ICSDIR/$mem/FV3ICS/wav
+        mkdir -p $WORKDIR/com/gefs/dev/gefs.${PDY}/$cyc/$mem/gfs.${PDY}/$cyc/wave/restart
+        cd $WORKDIR/com/gefs/dev/gefs.${PDY}/$cyc/$mem/gfs.${PDY}/$cyc/wave/restart
+        ln -s $ICSDIR/$mem/FV3ICS/wav/${PDY}.000000.restart.gwes_30m ${PDY}.000000.restart.gwes_30m
         #echo no wave initial data at this time
         #  done
     fi

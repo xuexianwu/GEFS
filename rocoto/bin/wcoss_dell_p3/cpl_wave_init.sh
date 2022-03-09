@@ -9,7 +9,7 @@ status=$?
 
 export DATAROOT="$WORKDIR/tmpnwprd/gefs.$PDY/$cyc"
 [[ ! -d $DATAROOT ]] && mkdir -p $DATAROOT
-export DATA_DIR="$WORKDIR/com/gens/dev"
+export DATA_DIR="$WORKDIR/com/gefs/dev"
 ###############################################################
 echo
 echo "=============== START TO RUN WAVE INIT ==============="

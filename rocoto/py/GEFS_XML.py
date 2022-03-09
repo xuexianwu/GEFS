@@ -360,7 +360,7 @@ def get_workflow_body(dicBase):
 
     strings.append('\n')
     #strings.append('<workflow realtime="F" cyclethrottle="&CYCLE_THROTTLE;" scheduler="&SCHEDULER;" taskthrottle="&TASK_THROTTLE;">\n')
-    strings.append('<workflow realtime="F" cyclethrottle="&CYCLE_THROTTLE;" scheduler="&SCHEDULER;" corethrottle="10280">\n') # #taskthrottle="&TASK_THROTTLE;">\n')
+    strings.append('<workflow realtime="F" cyclethrottle="&CYCLE_THROTTLE;" scheduler="&SCHEDULER;" corethrottle="10240">\n') # #taskthrottle="&TASK_THROTTLE;">\n')
 
     strings.append('\n')
     strings.append('\t<log><cyclestr>&WORKFLOW_LOG_DIR;/gefs@Y@m@d@H.log</cyclestr></log>\n')

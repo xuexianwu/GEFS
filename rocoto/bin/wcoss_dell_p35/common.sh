@@ -14,8 +14,8 @@ export PBS_JOBID=$LSB_JOBID
 export MEMBER=`echo $RUNMEM|cut -c4-5`
 
 # Calculate the number of tasks based on the task geometry
-#(( NTASKS=$(echo $LSB_PJL_TASK_GEOMETRY | grep -Po "\d+" | sort -n | tail -1) + 1 ))
-#export NTASKS
+(( NTASKS=$(echo $LSB_PJL_TASK_GEOMETRY | grep -Po "\d+" | sort -n | tail -1) + 1 ))
+export NTASKS
 if [[ $RocotoGen == 0 ]]; then
     export gefsmpexec="mpirun -n $total_tasks"
     export gefsmpexec_mpmd="mpirun -n $total_tasks cfp mpmd_cmdfile"

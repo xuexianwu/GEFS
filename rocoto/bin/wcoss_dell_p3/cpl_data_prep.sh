@@ -39,7 +39,7 @@ for config in $configs; do
 done
 
 export RUNDIR=$WORKDIR/tmpnwprd/gefs.$PDY/$cyc
-export ICSDIR=$COMROOT/gens/dev/gefs.$PDY/$cyc
+export ICSDIR=$COMROOT/gefs/dev/gefs.$PDY/$cyc
 export ROTDIR=$RUNDIR
 export DATAROOT=$RUNDIR
 mkdir -p $ICSDIR

@@ -22,7 +22,7 @@ module purge
 source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive
 module list
 export mem=`echo $RUNMEM|cut -c3-5`
-export ROTDIR=$COMROOT/gens/dev/gefs.$PDY/$cyc/$mem
+export ROTDIR=$COMROOT/gefs/dev/gefs.$PDY/$cyc/$mem
 # CALL executable job script here
 $HOMEgfs/jobs/JGLOBAL_FORECAST_MEDCOLD
 
