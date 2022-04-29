@@ -3,10 +3,37 @@
 # EXPORT list here
 set -x
 export IOBUF_PARAMS=cfi*:size=64M:count=4:verbose
-
-
 ulimit -s unlimited
 ulimit -a
+
+# module_ver.h
+. $SOURCEDIR/versions/gefs_hera.ver
+
+# Load modules
+. /apps/lmod/lmod/init/ksh
+module list
+module purge
+
+module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
+
+module load EnvVars/$EnvVars_ver
+module load intel/$ips_ver
+module load impi/$impi_ver
+module load prod_util/$prod_util_ver
+#module load prod_envir/$prod_envir_ver
+module load grib_util/$grib_util_ver
+module load netcdf/$NetCDF_ver
+module load hdf5/$HDF5_serial_ver
+
+#module load CFP/$CFP_ver
+#export USE_CFP=YES
+
+module list
+
+# For Development
+. $GEFS_ROCOTO/bin/hera/common.sh
+
+# Export List
 
 #export OMP_NUM_THREADS=4
 
@@ -25,5 +52,5 @@ export MEMORY_AFFINITY=core:4
 # export for development runs only begin
 
 # CALL executable job script here
-. $SOURCEDIR/jobs/JGEFS_ATMOS_ENSSTAT
+$SOURCEDIR/jobs/JGEFS_ATMOS_ENSSTAT
 
