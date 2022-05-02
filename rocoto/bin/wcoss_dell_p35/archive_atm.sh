@@ -29,6 +29,8 @@ module list
 
 # Export List
 #export NTHREADS_SIGCHGRS=${GEFS_TPP:-6}
+export COMIN=${COMIN:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/$cyc}
+export COMOUT=${COMOUT:-${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/$cyc}
 
 # CALL executable job script here
 $GEFS_ROCOTO/bin/py/archive_atm.py
