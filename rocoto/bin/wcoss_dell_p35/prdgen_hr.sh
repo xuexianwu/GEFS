@@ -49,7 +49,7 @@ export COMINgfs=${COMINgfs:-$(compath.py gfs/prod/gfs.${PDY})/$cyc/atmos}
 #cp ${COMOUT}/00/$mem/gfs.$PDY/00/*daily* $COMOUT/00/ocndaily/$mem
 #cp ${COMROOT}/${NET}/${envir}/${RUN}.${PDY}/00/$mem/gfs.$PDY/00/*daily* $COMOUT/00/ocndaily/$mem
 #cp ${COMOUT}/$mem/gfs.$PDY/00/*daily* $COMOUT/ocndaily/$mem
-cp ${COMIN}/*daily* $COMOUT/ocndaily/$mem
+cp ${COMIN}/ocean/*daily* $COMOUT/ocndaily/$mem
 
 # CALL executable job script here
 $SOURCEDIR/jobs/JGEFS_ATMOS_PRDGEN

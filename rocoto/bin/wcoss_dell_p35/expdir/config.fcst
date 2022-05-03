@@ -45,6 +45,7 @@ fi
 export npe_fcst="1560"
 export npe_fcst_gfs="1560"
 export npe_node_fcst="40"
+export npe_node_fcst_gfs="40"
 export nth_fcst="1"
 export NTHREADS_FV3="1"
 export memory_fcst="1024M"
@@ -103,7 +104,7 @@ export dnats=1
 export do_sat_adj=".true."
 export nwat=6
 export dddmp=0.1
-
+export DO_CA=YES
 # gfs_physics_nml section
 
 export ldiag_ugwp=".false."
@@ -162,7 +163,7 @@ export isubc_lw=2
 
 export cal_pre=".false."
 
-export lgfdlmprad=".true."
+#export lgfdlmprad=".true."
 export effr_in=".true."
 export reiflag=2
 export hybedmf=.false.
@@ -196,10 +197,11 @@ export cplmode="nems_frac"
 export psm_bc="1"
 
 export min_lakeice="0.15"
-export min_seaice="1e-11" 
-
+export min_seaice="1.0e-6" 
+export use_cice_alb=".true."
 #export FSICL="99999"
 export FSICL="0"
+export FSICS="0"
 
 # Stochastic physics parameters
 # nam_stochy section
@@ -268,7 +270,7 @@ fi
 
 
 if [[ $DO_SKEB = "YES" ]]; then
-export SKEB=0.7,-999,-999,-999,-999
+export SKEB=0.8,-999,-999,-999,-999
 export iseed_skeb=$ISEED_SKEB
 export SKEB_TAU=2.16E4,1.728E5,2.592E6,7.776E6,3.1536E7
 export SKEB_LSCALE=500.E3,1000.E3,2000.E3,2000.E3,2000.E3
@@ -276,7 +278,7 @@ export SKEBNORM=1
 fi
 
 if [[ $DO_SPPT = "YES" ]]; then
-export SPPT=0.56,0.28,0.14,0.056,0.028
+export SPPT=0.64,0.32,0.16,0.064,0.032
 export iseed_sppt=$ISEED_SPPT
 export SPPT_TAU=2.16E4,2.592E5,2.592E6,7.776E6,3.1536E7
 export SPPT_LSCALE=500.E3,1000.E3,2000.E3,2000.E3,2000.E3
@@ -285,13 +287,13 @@ export sppt_sfclimit=.true.
 export use_zmtnblck=.true.
 fi
 
-if [[ $STO_OCNSPPT = "YES" ]]; then
+if [[ $DO_OCN_SPPT = "YES" ]]; then
 export OCNSPPT=0.8,0.4,0.2,0.08,0.04
 export OCNSPPT_TAU=2.16E4,2.592E5,2.592E6,7.776E6,3.1536E7
 export OCNSPPT_LSCALE=500.E3,1000.E3,2000.E3,2000.E3,2000.E3
 fi
 
-if [[ $STO_EPBL = "YES" ]]; then
+if [[ $DO_OCN_PERT_EPBL = "YES" ]]; then
 export EPBL=0.8,0.4,0.2,0.08,0.04
 export EPBL_TAU=2.16E4,2.592E5,2.592E6,7.776E6,3.1536E7
 export EPBL_LSCALE=500.E3,1000.E3,2000.E3,2000.E3,2000.E3

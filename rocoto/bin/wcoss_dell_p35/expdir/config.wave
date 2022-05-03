@@ -122,7 +122,8 @@ if [ $RUNMEM = -1 ]; then
   export waveMEMB=
 else
 # Extract member number only
-  export waveMEMB=$(echo $RUNMEM | grep -o '..$')
+  #export waveMEMB=$(echo $RUNMEM | grep -o '..$')
+  export waveMEMB=
 fi
 
 # Determine if wave component needs input and/or is coupled

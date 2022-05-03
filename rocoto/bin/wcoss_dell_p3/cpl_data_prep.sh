@@ -72,12 +72,15 @@ do
 
 # Setup ATM initial condition files
 #cp -r $ORIGIN_ROOT/$CPL_ATMIC/$CDATE/$CDUMP  $ICSDIR/$CDATE/
-cp -r $atminitdir/gefs.$PDY/$cyc/$mem/*  $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
+#cp -r $atminitdir/gefs.$PDY/$cyc/$mem/*  $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
+
+cp -r /gpfs/dell6/emc/modeling/noscrub/Bing.Fu/ep3ic/gefs.$PDY/$cyc/$mem/gfs* $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
+cp -r /gpfs/dell6/emc/modeling/noscrub/Bing.Fu/ep3ic/gefs.$PDY/$cyc/c00/sfc* $ICSDIR/$mem/FV3ICS/gfs/$CASE/INPUT
 
 # Setup Ocean IC files 
 #cp -r $ORIGIN_ROOT/$CPL_OCNIC/$CDATE/ocn/$OCNRES/MOM*.nc  $ICSDIR/$CDATE/ocn/
 #cp -r $cplinit/$CDATE/050/ocn  $ICSDIR/$mem/FV3ICS
-cp -r $ocninitdir/$PDY/MOM4_TS_restart_regular.nc $ICSDIR/$mem/FV3ICS/ocn/MOM6_IC_TS.nc
+#cp -r $ocninitdir/$PDY/MOM4_TS_restart_regular.nc $ICSDIR/$mem/FV3ICS/ocn/MOM6_IC_TS.nc
 #Setup Ice IC files 
 #cp $ORIGIN_ROOT/$CPL_ICEIC/$CDATE/ice/$ICERES/cice5_model_${ICERESdec}.res_$CDATE.nc $ICSDIR/$CDATE/ice/
 #cp -r $cplinit/$CDATE/050/ice $ICSDIR/$mem/FV3ICS
@@ -88,6 +91,9 @@ if [ $cplwav = ".true." ]; then
 #  do
     #cp $ORIGIN_ROOT/$CPL_WAVIC/$CDATE/wav/$grdID/*restart.$grdID $ICSDIR/$CDATE/wav/
     cp -r $wavinitdir/${PDY}.000000.restart.gwes_30m $ICSDIR/$mem/FV3ICS/wav
+    mkdir -p $WORKDIR/com/gens/dev/gefs.${PDY}/$cyc/$mem/gfs.${PDY}/$cyc/wave/restart
+    cd $WORKDIR/com/gens/dev/gefs.${PDY}/$cyc/$mem/gfs.${PDY}/$cyc/wave/restart
+    ln -s $ICSDIR/$mem/FV3ICS/wav/${PDY}.000000.restart.gwes_30m ${PDY}.000000.restart.gwes_30m
 #echo no wave initial data at this time
 #  done
 fi

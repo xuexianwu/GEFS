@@ -102,7 +102,7 @@ export POSTGRB2TBL="${HOMEgfs}/sorc/gfs_post.fd/parm/params_grib2_tbl_new" #"/gp
 # CCPP Configurations
 #export CCPP_SUITE="FV3_GFS_v16_coupled_nsstNoahmp_p5gwd"
 #export CCPP_SUITE="FV3_GFS_v16_coupled_nsstNoahUGWPv1"
-export CCPP_SUITE="FV3_GFS_v17_coupled_p8b"
+export CCPP_SUITE="FV3_GFS_v17_coupled_p8"
 
 # Toggle to turn on/off GFS downstream processing.
 export DO_BUFRSND="NO" # Run GFS_POSTSND
@@ -218,7 +218,9 @@ export STEP_GFS="24"
 # if gaussian_grid, set OUTPUT_FILE for nemsio or netcdf
 export QUILTING=".true."
 export OUTPUT_GRID="gaussian_grid"
-export OUTPUT_FILETYPES="netcdf"
+export OUTPUT_FILE="netcdf"
+export OUTPUT_FILETYPE_ATM="netcdf_parallel"
+export OUTPUT_FILETYPE_SFC="netcdf"
 
 # inline post
 export WRITE_DOPOST=".true."
