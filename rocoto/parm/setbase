@@ -148,7 +148,7 @@ elif [[ -L /usrx && "$( readlink /usrx 2> /dev/null )" =~ dell ]] ; then
     echo "Using settings for WCOSS DELL Phase III"
     export machine='WCOSS_DELL_P3'
 #    export JOBPHASE=
-    export HOMEDIR=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p8ep3/gw_p8ep3
+    export HOMEDIR=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/cpl_p8/p8ep3/gw_p8ep3
 #    export HOMEtrak=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common/git/ens_tracker/ens_tracker.v2.1.2
     # export HOMEdata=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common
 #    export HOMEdata=/gpfs/dell2/emc/modeling/noscrub/Walter.Kolczynski/gefs_input
@@ -161,8 +161,8 @@ elif [[ -L /usrx && "$( readlink /usrx 2> /dev/null )" =~ dell ]] ; then
     # Wave model settings: ice data dir
     # export COMICE=/gpfs/dell2/emc/modeling/noscrub/Henrique.Alves/input_archive/omb/prod
 #    export COMICE=$HOMEdata/sea_ice
-       export HOMEgfs=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p8ep3/gw_p8ep3
-        export EXPDIR=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p8ep3/expdir
+       export HOMEgfs=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/cpl_p8/p8ep3/gw_p8ep3
+        export EXPDIR=/gpfs/dell6/emc/modeling/noscrub/Xianwu.Xue/cpl_p8/p8ep3/expdir
         export CDUMP=gfs
 
     
