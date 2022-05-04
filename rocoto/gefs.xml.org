@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE workflow
+[
+	<!--
+	PROGRAM
+		Main workflow manager for Global Ensemble Forecast System
+
+	AUTHOR:
+		Xianwu Xue
+		Xianwu.Xue@noaa.gov
+
+	NOTES:
+		This workflow was automatically generated at 2021-03-05 21:42:11.620645
+	-->
+
+	<!ENTITY MEMLIST "p01 p02 p03 p04 p05 p06 p07 p08 p09 p10 c00">
+	<!ENTITY CYCLE_THROTTLE "1">
+	<!ENTITY TASK_THROTTLE "65">
+	<!ENTITY SDATE "2017101100">
+	<!ENTITY EDATE "2017101100">
+	<!ENTITY INCYC "168">
+	<!ENTITY WHERE_AM_I "wcoss_dell_p3">
+	<!ENTITY GEFS_ROCOTO "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gefs/nwdev/rocoto">
+	<!ENTITY BIN "&GEFS_ROCOTO;/bin/&WHERE_AM_I;">
+	<!ENTITY PRE "&GEFS_ROCOTO;/bin/gefs_pre_job.sh">
+	<!ENTITY WORKFLOW_LOG_DIR "&GEFS_ROCOTO;/logs">
+	<!ENTITY LOG_DIR "&WORKDIR;/com/output/dev">
+	<!ENTITY tmpnwprd "&WORKDIR;/tmpnwprd">
+	<!ENTITY DATA_DIR "&WORKDIR;/com/gens/dev">
+	<!ENTITY EXPID "gefs">
+	<!ENTITY PSLOT "gefs">
+	<!ENTITY SOURCEDIR "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gefs/nwdev">
+	<!ENTITY HOMEgfs "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gw_p7c">
+	<!ENTITY EXPDIR "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/expdir">
+	<!ENTITY WORKDIR "/gpfs/dell6/ptmp/Bing.Fu/o/p7cens">
+	<!ENTITY KEEP_DIR "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/keep/gefs">
+	<!ENTITY INIT_DIR "/gpfs/dell2/emc/retros/noscrub/Bing.Fu/GEFS_INIT/fv3_cold_init">
+	<!ENTITY HPSS_DIR "/NCEPDEV/emc-ensemble/2year/Bing.Fu/DELL35/p7cens/gefs">
+	<!ENTITY DIRS_TO_KEEP "ensstat">
+	<!ENTITY DIRS_TO_ARCHIVE "bufr,pgrb2a1p0,pgrb2b1p0,tctrack,ensstat">
+
+	<!-- External entities -->
+	<!ENTITY ENV_VARS   SYSTEM "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gefs/nwdev/rocoto/tasks/env_vars.ent">
+	<!ENTITY DATE_VARS   SYSTEM "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gefs/nwdev/rocoto/tasks/date_vars.ent">
+
+	<!-- External parameter entities -->
+	<!ENTITY % TASKS    SYSTEM "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gefs/nwdev/rocoto/tasks/all.ent">
+	%TASKS;
+
+	<!-- Machine related entities -->
+	<!ENTITY ACCOUNT "GEN-T2O">
+	<!ENTITY CUE2RUN "dev2">
+	<!ENTITY CUE2RUN1 "debug2">
+	<!ENTITY TRANSFER_QUEUE "dev_transfer">
+	<!ENTITY SCHEDULER "lsf">
+
+	<!-- END: Resource requirements for the workflow -->
+]>
+
+<workflow realtime="F" cyclethrottle="&CYCLE_THROTTLE;" scheduler="&SCHEDULER;" taskthrottle="&TASK_THROTTLE;" corethrottle="8640">
+
+	<log><cyclestr>&WORKFLOW_LOG_DIR;/gefs@Y@m@d@H.log</cyclestr></log>
+
+	<cycledef group="gefs">&SDATE;00 &EDATE;00 &INCYC;:00:00</cycledef>
+
+	<!--- init jobs -->
+	&cpl_data_prep;
+	&cpl_wave_init;
+	&cpl_wave_prep;
+	&cpl_fcst_high;
+	&prdgen_high;
+	&ensstat_high;
+	&enspost;
+	&keep_data_atm;
+	&archive_atm;
+	&cleanup_atm;
+
+</workflow>

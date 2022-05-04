@@ -149,6 +149,8 @@ export nst_anl=${nst_anl:-".true."}
 export nstf_name=${nstf_name:-"2,0,0,0,0"}
 export psautco=${psautco:-"0.0008,0.0005"}
 export prautco=${prautco:-"0.00015,0.00015"}
+export lgfdlmprad=.true.
+export effr_in=.true.
 
 #FV3 imp_microphysics
 export dnats=0
@@ -193,9 +195,9 @@ export ENS_SPS=${ENS_SPS:-.false.}
 ########################################
 # Stochastic physics parameters
 ########################################
-export DO_SPPT=${DO_SPPT:-"YES"}
-export DO_SHUM=${DO_SHUM:-"NO"}
-export DO_SKEB=${DO_SKEB:-"YES"}
+export DO_SPPT=${DO_SPPT:-".true."}
+export DO_SHUM=${DO_SHUM:-".false."}
+export DO_SKEB=${DO_SKEB:-".true."}
 export DO_VC=${DO_VC:-"NO"}
 export SET_STP_SEED=${SET_STP_SEED:-"NO"}
 export JCAP_STP=${JCAP_STP:-$JCAPFV}
@@ -207,15 +209,16 @@ CDATE=$PDY$cyc
 
 # Turn off stochastic physics for control member
 if [[ $RUNMEM = "gec00" ]]; then
-	export DO_SPPT="NO"
-	export DO_SHUM="NO"
-	export DO_SKEB="NO"
+	export DO_SPPT=".false."
+	export DO_SHUM=".false."
+	export DO_SKEB=".false."
 	export DO_VC="NO"
 fi # [[ $RUNMEM = "gec00" ]]
 
 # Stochastically Perturbed Physics Tendency
-if [[ $DO_SPPT = YES ]]; then
-	export SPPT_hr=${SPPT_hr:-"0.8,0.4,0.2,0.08,0.04"}                                 # Amplitude of SPPT patterns
+if [[ $DO_SPPT = ".true." ]]; then
+	#export SPPT_hr=${SPPT_hr:-"0.8,0.4,0.2,0.08,0.04"}                                 # Amplitude of SPPT patterns
+	export SPPT_hr=${SPPT_hr:-"0.4,0.2,0.1,0.04,0.02"}                                 # Amplitude of SPPT patterns
 	export SPPT_LOGIT_hr=${SPPT_LOGIT_hr:-.TRUE.}                                      # Do a logit transform to bound values from -1.0 to 1.0
 	export SPPT_TAU_hr=${SPPT_TAU_hr:-"2.16E4,2.592E5,2.592E6,7.776E6,3.1536E7"}       # Time scale in seconds
 	export SPPT_LSCALE_hr=${SPPT_LSCALE_hr:-"500.E3,1000.E3,2000.E3,2000.E3,2000.E3"}  # Length Scale in meters
@@ -239,7 +242,7 @@ fi
 
 # Stochastic Humidity
 
-if [[ $DO_SHUM = YES ]]; then
+if [[ $DO_SHUM = ".true." ]]; then
 	export SHUM_hr=${SHUM_hr:-"0.004,-999.,-999.,-999,-999"}                           # Amplitude of SHUM patterns
 	export SHUM_TAU_hr=${SHUM_TAU_hr:-"2.16E4,1.728E5,6.912E5,7.776E6,3.1536E7"}       # Time scale in seconds
 	export SHUM_LSCALE_hr=${SHUM_LSCALE_hr:-"500.E3,1000.E3,2000.E3,2000.E3,2000.E3"}  # Length Scale in meters
@@ -258,8 +261,9 @@ fi
 
 # Stochastic Kinetic Energy Backscatter
 
-if [[ $DO_SKEB = YES ]]; then
-	export SKEB_hr=${SKEB_hr:-"0.6,-999,-999,-999,-999"}                               # Amplitude of SPPT patterns
+if [[ $DO_SKEB = ".true." ]]; then
+	#export SKEB_hr=${SKEB_hr:-"0.6,-999,-999,-999,-999"}                               # Amplitude of SPPT patterns
+	export SKEB_hr=${SKEB_hr:-"0.7,-999,-999,-999,-999"}                               # Amplitude of SPPT patterns
 	export ISEED_SKEB_hr=${ISEED_SKEB_hr:-$((CDATE*1000 + MEMBER*10 + 1))}             # Seed for SKEB pattern
 	export SKEB_TAU_hr=${SKEB_TAU_hr:-"2.16E4,1.728E5,2.592E6,7.776E6,3.1536E7"}       # Time scale in seconds
 	export SKEB_LSCALE_hr=${SKEB_LSCALE_hr:-"500.E3,1000.E3,2000.E3,2000.E3,2000.E3"}  # Length Scale in meters

@@ -38,6 +38,8 @@ elif [[ "$WHERE_AM_I" == cray ]] ; then
     module load g2tmpl-intel/1.5.0
     module load python/3.6.3
     module load xt-lsfhpc
+#    module unload alps/5.2.4-2.0502.9774.31.11.ari
+#    module unload alps
     # wave modules
     module load HDF5-serial-intel-sandybridge/1.8.9
     module load NetCDF-intel-sandybridge/4.2
@@ -79,13 +81,13 @@ elif [[ "$WHERE_AM_I" == hera ]]; then
     module load netcdf/4.7.0
     module load hdf5/1.10.5
     #module load anaconda/anaconda3-5.3.1
-    module load anaconda/latest
-
+    #module load anaconda/latest
+    module use -a /contrib/anaconda/modulefiles
+    module load anaconda/2.3.0 
     module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
     module load prod_util/1.1.0
     module load g2tmpl/1.5.1
     module load grib_util/1.1.1
-
     module load gempak/7.4.2
 
     export PATH=$PATH:.
@@ -105,8 +107,9 @@ elif [[ "$WHERE_AM_I" == wcoss_dell_p3 ]] ; then
     module use -a /gpfs/dell1/nco/ops/nwpara/modulefiles/compiler_prod/ips/18.0.1
     module load util_shared/1.1.0
     module load g2tmpl/1.5.0
-    
     module load gempak/7.3.1
+   # module load NetCDF-parallel/4.7.4
+   # module load HDF5-parallel/1.10.6
 
     module load NetCDF/4.5.0
     module load HDF5-serial/1.10.1
@@ -115,6 +118,34 @@ elif [[ "$WHERE_AM_I" == wcoss_dell_p3 ]] ; then
     module load python/3.6.3
     export USE_CFP=YES
     export PATH=$PATH:.
+module use /usrx/local/nceplibs/dev/hpc-stack/libs/hpc-stack/modulefiles/stack
+module load hpc/1.1.0
+module load hpc-ips/18.0.1.163
+module load hpc-impi/18.0.1
+
+module load jasper/2.0.22
+module load zlib/1.2.11
+module load png/1.6.35
+
+module load hdf5/1.10.6
+module load netcdf/4.7.4
+
+module load bacio/2.4.1
+module load crtm/2.3.0
+module load g2/3.4.1
+module load g2tmpl/1.10.0
+module load gfsio/1.4.1
+module load ip/3.3.3
+module load nemsio/2.5.2
+module load sfcio/1.4.1
+module load sigio/2.3.2
+module load sp/2.3.3
+module load w3nco/2.4.1
+module load w3emc/2.7.3
+module load wrf_io/1.1.1
+
+
+
 
     # Temporary setting to test common settings
     . $GEFS_ROCOTO/bin/wcoss_dell_p3/common.sh

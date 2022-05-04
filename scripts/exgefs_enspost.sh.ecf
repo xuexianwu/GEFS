@@ -244,7 +244,8 @@ while test $fh -le $FHOUR; do
 				#
 				# CURRENTLY ALLOWS ONE MISSING
 				###############################
-				(( nfilesmin = nmem - 1 ))
+				#(( nfilesmin = nmem - 1 ))
+				(( nfilesmin = nmem ))
 
 				if (( nfiles < nfilesmin )); then
 					echo Search process FAILS nfilesprev=$nfilesprev foundgfs=$foundgfs foundall=$foundall previncr=$previncr ic=$ic fh=$fh

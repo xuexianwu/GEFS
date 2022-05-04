@@ -24,7 +24,7 @@ export MP_EUILIB=us
 # Set NCO messaging proxies
 export jlogfile=/dev/null
 export jobid=${job}.$$
-
+export NTASKS=24
 export wavempexec="aprun -b -j1 -cc depth -n"
 export wave_mpmd="cfp"
 

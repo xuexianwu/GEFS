@@ -123,6 +123,14 @@ export USESUBDIR=${USESUBDIR:-YES}
 # export DTPHYS=${DTPHYS:-450}
 
 #For the higher resolution part of FV3 forecast
+#export CASEHR=${CASEHR:-C192}
+#export LEVSHR=${LEVSHR:-64}
+#export DELTIM=${DELTIM:-450}
+#export JCAPFV=${JCAPFV:-382}
+#export LATBFV=${LATBFV:-384}
+#export LONBFV=${LONBFV:-768}
+#export MTNRSLFV=${MTNRSLFV:-382.768.384}
+
 export CASEHR=${CASEHR:-C384}
 export LEVSHR=${LEVSHR:-64}
 export DELTIM=${DELTIM:-450}

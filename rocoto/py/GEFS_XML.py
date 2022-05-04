@@ -600,6 +600,14 @@ def get_definitions(dicBase):
     sVarValue = dicBase[sVarName.upper()]
     strings.append('\t<!ENTITY {0} "{1}">\n'.format(sVarName, sVarValue))
 
+    sVarName = "HOMEgfs"
+    sVarValue = dicBase[sVarName.upper()]
+    strings.append('\t<!ENTITY {0} "{1}">\n'.format(sVarName, sVarValue))
+
+    sVarName = "EXPDIR"
+    sVarValue = dicBase[sVarName.upper()]
+    strings.append('\t<!ENTITY {0} "{1}">\n'.format(sVarName, sVarValue))
+
     sVarName = "WORKDIR"
     sVarValue = dicBase[sVarName.upper()]
     strings.append('\t<!ENTITY {0} "{1}">\n'.format(sVarName, sVarValue))

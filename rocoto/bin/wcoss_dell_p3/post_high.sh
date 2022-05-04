@@ -33,7 +33,7 @@ export MEMORY_AFFINITY=core:2
 # export total_tasks=24
 export OMP_NUM_THREADS=2
 # export taskspernode=12
-export POSTGRB2TBL=$G2TMPL_SRC/params_grib2_tbl_new
+export POSTGRB2TBL=/usrx/local/nceplibs/dev/NCEPLIBS/src/g2tmpl_v1.10.0/src/params_grib2_tbl_new
 
 export FORECAST_SEGMENT=hr
 

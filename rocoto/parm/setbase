@@ -36,7 +36,7 @@ PROJECT=ensemble
 LOGNAME=$LOGNAME
 SUBNAME=
 JOBPRIO=      
-JOBQUEUE=dev
+JOBQUEUE=dev2
 JOBPHASE=
 #Please make sure you have the correct account information
 export account=GEN-T2O
@@ -60,16 +60,16 @@ if [ -d /scratch2/NCEPDEV ]; then
     echo "Using settings for Hera"
     export machine='HERA'
     
-    export HOMEDIR=/scratch2/NCEPDEV/ensemble/save/Walter.Kolczynski/global-workflow/gefs_v12_retro2
+    export HOMEDIR=/scratch2/NCEPDEV/ensemble/Bing.Fu/git/gefs_v12_retro2
     export HOMEDIR1=$HOMEDIR
     export HOMERFC=/scratch2/NCEPDEV/ensemble/save/Walter.Kolczynski/ens_tracker
 
     #export HOMEdata=/scratch2/NCEPDEV/ensemble/noscrub/common
-    export HOMEdata=/scratch2/NCEPDEV/ensemble/noscrub/Walter.Kolczynski/gefs_input
-    export COMINenkf_base=$HOMEdata/gfs_15/enkfgdas.
-    export COMINgfs_base=$HOMEdata/gfs_15/gfs.
+    export HOMEdata=/scratch2/NCEPDEV/ensemble/Bing.Fu/common
+    export COMINenkf_base=$HOMEdata/fv3init/enkfgdas.
+    export COMINgfs_base=$HOMEdata/fv3init/gfs.
     export COMINcfs_base=$HOMEdata/cfs_2_sst/cfs.
-
+    export SSTDIR=$HOMEdata/2tsst
     # Location of WW3 executables
     export EXECcode=$HOMEDIR/sorc/fv3gfs.fd/WW3/model/exe
     # Wave model settings: ice data dir
@@ -87,6 +87,9 @@ if [ -d /scratch2/NCEPDEV ]; then
 #    export utilscript=$USHutil
 #    export SUPVIT=${SUPVIT:-${EXECutil}/supvit}
 
+	export HOMEgfs=/scratch2/NCEPDEV/ensemble/Bing.Fu/cpls/gw_enslp5
+	export EXPDIR=/scratch2/NCEPDEV/ensemble/Bing.Fu/cpls/exp_enslp5
+	export CDUMP=gfs
 elif [ -d /scratch4/NCEPDEV ]; then
     echo "Using settings for Theia"
     export machine='THEIA'
@@ -130,29 +133,38 @@ elif [[ -d /gpfs/hps && -e /etc/SuSE-release ]] ; then
     export JOBPHASE=
     export HOMEDIR=/gpfs/hps3/emc/ensemble/save/Walter.Kolczynski/global-workflow/gefs_v12_retro2
     export HOMEtrak=/gpfs/hps3/emc/ensemble/noscrub/emc.enspara/common/git/ens_tracker/ens_tracker.v2.1.2
-    export HOMEdata=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common
-    
-    # Location of WW3 executables
+    #export HOMEdata=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common
+    export HOMEdata=/gpfs/hps2/nco/storage/fv3gefs/emc.enspara/common
+    export COMINenkf_base=$HOMEdata/fv3init/enkfgdas.
+    export COMINgfs_base=$HOMEdata/fv3init/gfs.
+    export COMINcfs_base=$HOMEdata/cfs_2_sst/cfs.
+    export SSTDIR=$HOMEdata/2tsst
+    export COMICE=$HOMEdata/sea_ice
+     #Location of WW3 executables
     export EXECcode=$HOMEDIR/sorc/fv3gfs.fd/WW3/model/exe
     
 elif [[ -L /usrx && "$( readlink /usrx 2> /dev/null )" =~ dell ]] ; then
     # We are on NOAA Venus or Mars
     echo "Using settings for WCOSS DELL Phase III"
     export machine='WCOSS_DELL_P3'
-    export JOBPHASE=
-    export HOMEDIR=/gpfs/dell2/emc/modeling/noscrub/Walter.Kolczynski/save/global-workflow/gefs_v12_retro2
-    export HOMEtrak=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common/git/ens_tracker/ens_tracker.v2.1.2
+#    export JOBPHASE=
+    export HOMEDIR=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p8ep3/gw_p8ep3
+#    export HOMEtrak=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common/git/ens_tracker/ens_tracker.v2.1.2
     # export HOMEdata=/gpfs/dell2/emc/verification/noscrub/emc.enspara/common
-    export HOMEdata=/gpfs/dell2/emc/modeling/noscrub/Walter.Kolczynski/gefs_input
-    export COMINenkf_base=$HOMEdata/gfs_15/enkfgdas.
-    export COMINgfs_base=$HOMEdata/gfs_15/gfs.
-    export COMINcfs_base=$HOMEdata/cfs_2_sst/cfs.
+#    export HOMEdata=/gpfs/dell2/emc/modeling/noscrub/Walter.Kolczynski/gefs_input
+#    export COMINenkf_base=$HOMEdata/gfs_15/enkfgdas.
+#    export COMINgfs_base=$HOMEdata/gfs_15/gfs.
+#    export COMINcfs_base=$HOMEdata/cfs_2_sst/cfs.
 
     # Location of WW3 executables
-    export EXECcode=$HOMEDIR/sorc/fv3gfs.fd/WW3/model/exe
+#    export EXECcode=$HOMEDIR/sorc/fv3gfs.fd/WW3/model/exe
     # Wave model settings: ice data dir
     # export COMICE=/gpfs/dell2/emc/modeling/noscrub/Henrique.Alves/input_archive/omb/prod
-    export COMICE=$HOMEdata/sea_ice
+#    export COMICE=$HOMEdata/sea_ice
+       export HOMEgfs=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p8ep3/gw_p8ep3
+        export EXPDIR=/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p8ep3/expdir
+        export CDUMP=gfs
+
     
 fi
 

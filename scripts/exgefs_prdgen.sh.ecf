@@ -49,8 +49,8 @@ export pgapre="${9}"                   # PRDGEN_A_PREFIX[$stream]
 export pgbpre="${10}"                  # PRDGEN_B_PREFIX[$stream]
 export do_analysis="${11}"             # PRDGEN_DO_ANALYSIS[$stream]
 
-# mem=$(echo $RUNMEM|cut -c3-5)
-
+mem=$(echo $RUNMEM|cut -c3-5)
+cp $COMOUT/00/$mem/gfs.$PDY/00/*daily* $COMOUT/00/ocndaily/$mem
 cat <<-EOF
 	Settings for $0:
 	  RUNMEM: $RUNMEM
@@ -209,9 +209,9 @@ for hour in $hours; do
 		export mcfile=""
 		export makepgrb2b="no"
 	else 
-		export mafile=$COMOUT/$cyc/master/$RUNMEM.$cycle.master.grb2f$fhr$cfsuffix
-		export mifile=$COMOUT/$cyc/master/$RUNMEM.$cycle.master.grb2if$fhr$cfsuffix
-		export mcfile=$COMOUT/$cyc/misc/post/$RUNMEM.$cycle.master.control.f$fhr$cfsuffix
+		export mafile=$COMOUT/$cyc/$mem/gfs.$PDY/$cyc/atmos/$RUNMEM.$cycle.master.grb2f$fhr$cfsuffix
+		export mifile=$COMOUT/$cyc/$mem/gfs.$PDY/$cyc/atmos/$RUNMEM.$cycle.master.grb2if$fhr$cfsuffix
+		export mcfile=$COMOUT/$cyc/$mem/gfs.$PDY/$cyc/atmos/$RUNMEM.$cycle.master.grb2f$fhr$cfsuffix
 	fi # [[ $RUNMEM = "gegfs" ]]
 
 	export pcfile=$COMOUT/$cyc/misc/$submc/${RUNMEM}.t${cyc}z.prdgen.control.f$fhr$cfsuffix
@@ -247,14 +247,17 @@ for hour in $hours; do
 		else # [[ $RUNMEM = "gegfs" ]]
 			# Check if control file has been created, to make sure file is complete before using
 			testfhr=-1
+
 			if [[ -f $mcfile ]]; then
-				teststring=`cat $mcfile|head -1`
-				if [[ $teststring != '' ]]; then
-					if [[ -f $mifile ]]; then
-						testfhr=`echo $teststring | cut -c11-13`
-					fi
-				fi # [[ $teststring != '' ]]
+				#teststring=`cat $mcfile|head -1`
+#				if [[ $teststring != '' ]]; then
+#					if [[ -f $mifile ]]; then
+						#testfhr=`echo $teststring | cut -c11-13`
+						testfhr=999
+#					fi
+#				fi # [[ $teststring != '' ]]
 			fi # [[ -f $mcfile ]]
+
 			echo "testfhr=$testfhr fhr=$fhr"
 
 			if (( testfhr >= fhr )); then

@@ -1198,7 +1198,12 @@ def get_metatask_names(taskname=""):
     metatask_names.append('gwes_stats')
     # postsnd
     metatask_names.append('postsnd')
-
+    # cpl
+    metatask_names.append('cpl_wave_prep')
+    metatask_names.append('cpl_fcst_med')
+    metatask_names.append('cpl_fcst_high')
+    metatask_names.append('cpl_ocn_post')
+    metatask_names.append('cpl_wav_post')
     return metatask_names
 
 

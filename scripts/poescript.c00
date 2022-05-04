@@ -1,0 +1,70 @@
+echo `date` ############ poescript c00 begin
+  for outtype in "f2d" "f3d"; do
+
+    if [[ "$outtype" == "f2d" ]];then
+        varlist=/gefs_shortparmlist_2d.parm
+        outdirpre=/f2d
+    elif [[ "$outtype" == "f3d" ]];then 
+        varlist=/gefs_shortparmlist_3d.parm
+        outdirpre=/f3d
+    fi
+
+    nh=0
+    while [[ $nh -le  ]];do
+        fnh=`printf "%3.3d" ${nh}`
+        echo "extracting f${fnh}"
+
+        if [[ $nh -le  ]] && [[ "$outtype" == "f2d" ]];then
+            outres="0p25"
+            indirpresa=/pgrb2ap25
+            indirpresb=/pgrb2bp25
+
+            #if [[ "" == "f2d" ]];then
+            #    outres="0p25"
+            #    indirpres=/pgrb2p25
+            #elif [[ "" == "f3d" ]];then 
+            #    outres="0p25"
+            #    indirpres=/pgrb2p25
+            #fi
+        else
+            outres="0p50"
+            indirpresa=/pgrb2ap5
+            indirpresb=/pgrb2bp5
+        fi
+
+
+        if [[ $nh -lt  ]];then
+            outfreq=
+        else
+            outfreq=
+        fi
+
+        #Extract individual member files
+            echo $censname ==============
+            infilea=$indirpresa/gec00..pgrb2a.$outres.f${fnh}
+            infileb=$indirpresb/gec00..pgrb2b.$outres.f${fnh}
+            oufile=$outdirpre/gec00..pgrb2.$outres
+            
+            echo $infilea
+            echo $oufile
+            
+            if [ -f $infilea ]; then #check if input file exists before extraction
+                 $infilea | grep -F -f $varlist |  -i $infilea -append -grib $oufile>/dev/null
+            else
+                echo " does not exist"
+                echo "Please check it"
+                #exit 9
+            fi 
+            if [ -f $infileb ]; then #check if input file exists before extraction
+                 $infileb | grep -F -f $varlist |  -i $infileb -append -grib $oufile>/dev/null
+            else
+                echo "$infileb does not exist"
+                echo "Please check it"
+                #exit 9
+            fi 
+
+
+        nh=$(($nh + $outfreq))
+    done #fhr
+
+	done #f2d,f3d

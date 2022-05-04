@@ -5,7 +5,8 @@ echo `date` $0 `date -u` begin
 set -xa
 export PS4='$SECONDS + '
 date
-export MODEL_OUT_FORM=binarynemsiompiio
+#export MODEL_OUT_FORM=binarynemsiompiio
+export MODEL_OUT_FORM=netcdfpara
 
 export gefsmpexec=${gefsmpexec:-mpirun}
 
@@ -107,7 +108,7 @@ export OVERPARMEXEC=                        #Optional input in the post ush scri
 export CHGRESSH=$USHgsm/global_chgres.sh
 export CHGRESEXEC=$EXECgsm/global_chgres
 
-#export POSTGPSH=${POSTGPSH:-$USHpost/global_nceppost.sh}
+#export POSTGPSH=${POSTGPSH:-$USHpost/exgfs_nceppost_cpl.sh}
 export POSTGPSH=${POSTGPSH:-$USHpost/gfs_nceppost.sh}
 # RLW 20150622 test new version of post executable
 # export POSTGPEXEC=${POSTGPEXEC:-$EXECpost/ncep_post}
@@ -235,12 +236,12 @@ export POSTGPVARS_LOW=$POSTGPVARS_HIGH
 if [[ $RERUN = YES ]]; then
     $USHgefs/gefs_restart_cleanup.sh 00 $FHMAX post prd0p5 prd1p0 prd2p5
 fi
-
+export mem=`echo $RUNMEM|cut -c3-5`
 ####################################
 # Specify Restart File Name to Key Off
 ####################################
 #restart_file=$COMIN/$cyc/misc/fcst/${RUNMEM}.t${cyc}z.logf
-restart_file=$COMIN/$cyc/sfcsig/${RUNMEM}.t${cyc}z.logf
+restart_file=$COMIN/$cyc/$mem/gfs.${PDY}/$cyc/atmos/gfs.t${cyc}z.logf
 #restart_file=$COMIN/$cyc/sfcsig/$mem/${RUNMEM}.t${cyc}z.logf
 
 ####################################

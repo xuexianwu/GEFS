@@ -34,9 +34,9 @@ export MEMORY_AFFINITY=core:2
 export NODES=2
 export total_tasks=24
 export OMP_NUM_THREADS=2
-export taskspernode=12
+export taskspernode=24
 export POSTGRB2TBL=$G2TMPL_SRC/params_grib2_tbl_new
-
+export OMP_STACKSIZE=2048M
 export FORECAST_SEGMENT=hr
 
 export envir=${envir:-dev}
