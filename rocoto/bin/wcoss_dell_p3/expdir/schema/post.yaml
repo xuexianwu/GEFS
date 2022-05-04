@@ -1,0 +1,21 @@
+# This is used to set variable design for grib product generation.
+# Reconfiguring These variables are not supported in this release.
+
+post_schema: &post_schema !Template
+  GOESF:
+    type: bool
+    description: make synthetic goes imagery
+  GTGF:
+    type: bool
+    description: make gtg icing product
+  FLXF:
+    type: bool
+    description: grib2 flux file written by post
+  PGB1F: { type: bool }
+  GFS_DOWNSTREAM: { type: bool }
+  downset: { type: int }
+  NPOSTGRP: { type: int }  
+  master_grid:
+    type: string
+    allowed: [ "1deg", "0p5deg", "0p25deg", "0p125deg" ]
+    description: Original grid of the post

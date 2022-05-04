@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<!DOCTYPE workflow [
+  <!ENTITY LOG_DIR "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/com/t1/logs">
+  <!ENTITY TASK_THROTTLE "16">
+  <!ENTITY CYCLE_THROTTLE "2">
+  <!ENTITY MAX_TRIES "2">
+  <!ENTITY EXPDIR "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/t1">
+  <!ENTITY DATAROOT "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/stmp">
+  <!ENTITY PSLOT "t1">
+  <!ENTITY HOMEgfs "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/gw_p7c">
+  <!ENTITY HOMEobsproc_network "/gpfs/dell2/emc/modeling/noscrub/emc.glopara/git/obsproc/obsproc_global.v3.2.3">
+  <!ENTITY HOMEobsproc_prep "/gpfs/dell2/emc/modeling/noscrub/emc.glopara/git/obsproc/obsproc_global.v3.2.3">
+  <!ENTITY COM "/gpfs/dell6/emc/modeling/noscrub/Bing.Fu/p7cens/com/t1">
+<!ENTITY QUEUE "dev2">
+<!ENTITY QUEUE1 "debug2">
+<!ENTITY QUEUESHARED "dev2_shared">
+<!ENTITY QUEUESERV "dev2_transfer">
+<!ENTITY CPU_PROJECT "GEN-T2O">
+  
+]>
+<workflow realtime="F"
+          cyclethrottle="&CYCLE_THROTTLE;"
+          scheduler="lsf"
+          taskthrottle="&TASK_THROTTLE;" >
+  <log><cyclestr>&COM;/logs/@Y@m@d@H/rocoto.log</cyclestr></log>
+  <cycledef group="first">201304010000 201304010000 24:00:00</cycledef>
+  <cycledef group="gdas">201304010000 201304010000 24:00:00</cycledef>
+  <cycledef group="gfs">201304010000 201304010000 24:00:00</cycledef>
+  <cycledef group="gfs_00_12">201304020000 201304020000 24:00:00</cycledef>
+  <cycledef>201304010000 201304010000 24:00:00</cycledef>
+
+  <metatask name="ics">
+    <var name="dummy_var_2">DUMMY_VALUE</var>
+    <task name="ics.jgfs_emc_mom6ic" maxtries="2" cycledefs="gfs">
+      <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; $HOMEgfs/jobs/rocoto/coupled_ic.sh'</command>
+      <queue>&QUEUE;</queue>
+      <account>&CPU_PROJECT;</account>
+      <jobname>ics.jgfs_emc_mom6ic</jobname>
+      <join><cyclestr>&LOG_DIR;/@Y@m@d@H/ics.jgfs_emc_mom6ic.log</cyclestr></join>
+      
+      <walltime>0:30:00</walltime>
+      <nodes>1:ppn=24</nodes>
+      <native>-R 'affinity[core(1)]'</native>
+      
+      <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+      <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+      <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+      <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+      <envar><name>CDUMP</name><value>gfs</value></envar>
+      <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+      <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+      <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+      <envar><name>HOMEobsproc_network</name><value>&HOMEobsproc_network;</value></envar>
+      <envar><name>HOMEobsproc_global</name><value>&HOMEobsproc_network;</value></envar>
+      <envar><name>HOMEobsproc_prep</name><value>&HOMEobsproc_prep;</value></envar>
+      <envar><name>job</name><value>jgfs_emc_mom6ic_<cyclestr>@H</cyclestr></value></envar>
+      
+      
+      <!-- no dependencies -->
+    </task>
+  </metatask>
+  <metatask name="gfs">
+    <var name="dummy_var_3">DUMMY_VALUE</var>
+    <metatask name="gfs.prep">
+      <var name="dummy_var_4">DUMMY_VALUE</var>
+      <task name="gfs.prep.waveinit" maxtries="2" cycledefs="gfs">
+        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; $HOMEgfs/jobs/JGLOBAL_WAVE_INIT'</command>
+        <queue>&QUEUE;</queue>
+        <account>&CPU_PROJECT;</account>
+        <jobname>gfs.prep.waveinit</jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/gfs.prep.waveinit.log</cyclestr></join>
+        
+        <walltime>0:15:00</walltime>
+        <nodes>1:ppn=12</nodes>
+        <native>-R 'affinity[core(3)]'</native>
+        
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>gfs</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+        <envar><name>HOMEobsproc_network</name><value>&HOMEobsproc_network;</value></envar>
+        <envar><name>HOMEobsproc_global</name><value>&HOMEobsproc_network;</value></envar>
+        <envar><name>HOMEobsproc_prep</name><value>&HOMEobsproc_prep;</value></envar>
+        <envar><name>job</name><value>waveinit_<cyclestr>@H</cyclestr></value></envar>
+        
+        
+        <dependency>
+          <taskdep task="ics.jgfs_emc_mom6ic"/>
+        </dependency>
+      </task>
+      <task name="gfs.prep.waveprep" maxtries="2" cycledefs="gfs">
+        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; $HOMEgfs/jobs/JGLOBAL_WAVE_PREP'</command>
+        <queue>&QUEUE;</queue>
+        <account>&CPU_PROJECT;</account>
+        <jobname>gfs.prep.waveprep</jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/gfs.prep.waveprep.log</cyclestr></join>
+        
+        <walltime>0:15:00</walltime>
+        <nodes>1:ppn=12</nodes>
+        <native>-R 'affinity[core(3)]'</native>
+        
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>gfs</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+        <envar><name>HOMEobsproc_network</name><value>&HOMEobsproc_network;</value></envar>
+        <envar><name>HOMEobsproc_global</name><value>&HOMEobsproc_network;</value></envar>
+        <envar><name>HOMEobsproc_prep</name><value>&HOMEobsproc_prep;</value></envar>
+        <envar><name>job</name><value>waveprep_<cyclestr>@H</cyclestr></value></envar>
+        
+        
+        <dependency>
+          <taskdep task="gfs.prep.waveinit"/>
+        </dependency>
+      </task>
+    </metatask>
+    <metatask name="gfs.forecast">
+      <var name="dummy_var_5">DUMMY_VALUE</var>
+      <task name="gfs.forecast.highres" maxtries="2" cycledefs="gfs">
+        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh forecast ; module list ; source $EXPDIR/config.base ; $HOMEgfs/jobs/JGLOBAL_FORECAST'</command>
+        <queue>&QUEUE;</queue>
+        <account>&CPU_PROJECT;</account>
+        <jobname>gfs.forecast.highres</jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/gfs.forecast.highres.log</cyclestr></join>
+        
+        <walltime>6:00:00</walltime>
+        <nodes>35:ppn=40</nodes>
+        <native>-R 'affinity[core(1)]'</native>
+        
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>gfs</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+        <envar><name>HOMEobsproc_network</name><value>&HOMEobsproc_network;</value></envar>
+        <envar><name>HOMEobsproc_global</name><value>&HOMEobsproc_network;</value></envar>
+        <envar><name>HOMEobsproc_prep</name><value>&HOMEobsproc_prep;</value></envar>
+        <envar><name>job</name><value>highres_<cyclestr>@H</cyclestr></value></envar>
+        
+        
+        <dependency>
+          <metataskdep metatask="gfs.prep"/>
+        </dependency>
+      </task>
+    </metatask>
+    </metatask>
+  <!-- The final task dependencies are automatically generated to handle Complate and Trigger conditions. -->
+
+</workflow>

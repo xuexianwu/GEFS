@@ -1,0 +1,270 @@
+resources_sum:
+  fallback_run_gfsremap: !JobRequest
+  - OMP_NUM_THREADS: 2
+    max_ppn: !calc "doc.platform.partitions.default_exclusive.nodes.max_ranks_per_node(\n\
+      \  doc.exclusive_resources.run_gfsfcst[0])"
+    mpi_ranks: !calc 'min(240,doc.exclusive_resources.run_gfsfcst.total_ranks())'
+  remap_resource_template:
+    OMP_NUM_THREADS: 2
+    max_ppn: !calc 'partition.nodes.max_ranks_per_node(resources[0])'
+    mpi_ranks: !calc 'min(240,resources.total_ranks())'
+  run_anal: !JobRequest
+  - OMP_NUM_THREADS: max
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 6
+    memory_per_rank: null
+    mpi_ranks: 144
+    walltime: !timedelta '02:30:00'
+  run_arch: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '06:00:00'
+  run_awips: !JobRequest
+  - batch_memory: 254M
+    max_ppn: 4
+    mpi_ranks: 4
+    walltime: !timedelta '02:00:00'
+  run_big_downstream: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 2
+    walltime: !timedelta '00:30:00'
+  run_coupled_fcst: !JobRequest
+  - OMP_NUM_THREADS: 2
+    batch_memory: 1024M
+    max_ppn: 28
+    memory_per_rank: null
+    mpi_ranks: 1700
+    walltime: !timedelta '08:00:00'
+  run_coupled_medcold: !JobRequest
+  - OMP_NUM_THREADS: 2
+    batch_memory: 1024M
+    max_ppn: 28
+    memory_per_rank: null
+    mpi_ranks: 1700
+    walltime: !timedelta '00:30:00'
+  run_dump_waiter: !JobRequest
+  - batch_memory: 300M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '01:00:00'
+  run_dwn: !JobRequest
+  - OMP_NUM_THREADS: 1
+    mpi_ranks: 24
+  run_earc: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '06:00:00'
+  run_ecen: !JobRequest
+  - OMP_NUM_THREADS: 2
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 12
+    memory_per_rank: null
+    mpi_ranks: 84
+    walltime: !timedelta '00:30:00'
+  run_efcs: !JobRequest
+  - batch_memory: 254M
+    max_ppn: 40
+    mpi_ranks: 192
+    walltime: !timedelta '00:30:00'
+  run_eobs: !JobRequest
+  - OMP_NUM_THREADS: 4
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 6
+    memory_per_rank: null
+    mpi_ranks: 72
+    walltime: !timedelta '00:15:00'
+  run_eomg: !JobRequest
+  - OMP_NUM_THREADS: 2
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 6
+    memory_per_rank: null
+    mpi_ranks: 72
+    walltime: !timedelta '00:30:00'
+  run_epos: !JobRequest
+  - OMP_NUM_THREADS: 2
+    batch_memory: 254M
+    exe: placeholder
+    max_ppn: 12
+    memory_per_rank: null
+    mpi_ranks: 84
+    walltime: !timedelta '00:30:00'
+  run_eupd: !JobRequest
+  - OMP_NUM_THREADS: 4
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 12
+    memory_per_rank: null
+    mpi_ranks: 120
+    walltime: !timedelta '00:30:00'
+  run_final: !JobRequest
+  - batch_memory: 1024M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '00:01:00'
+  run_fv3ic: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 24
+    mpi_ranks: 24
+    walltime: !timedelta '00:30:00'
+  run_gdas_gempak: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 2
+    walltime: !timedelta '00:30:00'
+  run_gdas_gempak_meta_ncdc: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 2
+    walltime: !timedelta '00:30:00'
+  run_gdas_post_manager: !JobRequest
+  - exe: placeholder
+    memory: 300M
+    walltime: !timedelta '00:30:00'
+  run_gdasfcst: !JobRequest
+  - batch_memory: 1024M
+    max_ppn: 28
+    mpi_ranks: 288
+    walltime: !timedelta '00:15:00'
+  run_gdaspost: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 12
+    memory_per_rank: null
+    mpi_ranks: 72
+    walltime: !timedelta '00:20:00'
+  run_gdasvrfy: !JobRequest
+  - OMP_NUM_THREADS: null
+    batch_memory: 3072M
+    compute_memory: 16384M
+    exe: placeholder
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '03:00:00'
+  run_gempak: !JobRequest
+  - OMP_NUM_THREADS: 3
+    batch_memory: 254M
+    max_ppn: 4
+    mpi_ranks: 20
+    walltime: !timedelta '02:00:00'
+  run_getic: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '06:00:00'
+  run_gfs_gempak: !JobRequest
+  - OMP_NUM_THREADS: 3
+    batch_memory: 3072M
+    max_ppn: 4
+    mpi_ranks: 28
+    walltime: !timedelta '03:00:00'
+  run_gfs_post_manager: !JobRequest
+  - exe: placeholder
+    memory: 300M
+    walltime: !timedelta '08:15:00'
+  run_gfsfcst: !JobRequest
+  - batch_memory: 1024M
+    max_ppn: 28
+    mpi_ranks: 1240
+    walltime: !timedelta '08:00:00'
+  run_gfspost: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 12
+    memory_per_rank: null
+    mpi_ranks: 72
+    walltime: !timedelta '00:20:00'
+  run_gfsvrfy: !JobRequest
+  - OMP_NUM_THREADS: null
+    batch_memory: 3072M
+    compute_memory: 16384M
+    exe: placeholder
+    max_ppn: 1
+    mpi_ranks: 5
+    walltime: !timedelta '03:00:00'
+  run_init_chem: !JobRequest
+  - batch_memory: 600M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '00:05:00'
+  run_make_next_cycles: !JobRequest
+  - batch_memory: 600M
+    walltime: !timedelta '00:15:00'
+  run_nothing: !JobRequest
+  - batch_memory: 300M
+    walltime: !timedelta '00:02:00'
+  run_one_hour_exclusive: !JobRequest
+  - batch_memory: 300M
+    mpi_ranks: 2
+    walltime: !timedelta '04:00:00'
+  run_one_node_downstream: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '00:30:00'
+  run_postsnd: !JobRequest
+  - batch_memory: 254M
+    max_ppn: 3
+    mpi_ranks: 12
+    walltime: !timedelta '04:00:00'
+  run_postsndcfp: !JobRequest
+  - batch_memory: 254M
+    max_ppn: 3
+    mpi_ranks: 10
+    walltime: !timedelta '02:00:00'
+  run_prep: !JobRequest
+  - OMP_NUM_THREADS: null
+    batch_memory: 3072M
+    exe: placeholder
+    max_ppn: 12
+    memory_per_rank: null
+    mpi_ranks: 12
+    walltime: !timedelta '00:15:00'
+  run_prepbufr: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 4
+    mpi_ranks: 4
+    walltime: !timedelta '00:15:00'
+  run_sfc_prep: !JobRequest
+  - batch_memory: 1024M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '00:02:00'
+  run_small_downstream: !JobRequest
+  - OMP_NUM_THREADS: 1
+    batch_memory: 3072M
+    max_ppn: 2
+    mpi_ranks: 2
+    walltime: !timedelta '00:02:00'
+  run_verfrad: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '00:20:00'
+  run_vminmon: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 1
+    mpi_ranks: 1
+    walltime: !timedelta '00:10:00'
+  run_wavepostgrd: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 10
+    mpi_ranks: 10
+    walltime: !timedelta '00:30:00'
+  run_wavepostpnt: !JobRequest
+  - batch_memory: 3072M
+    max_ppn: 40
+    mpi_ranks: 80
+    walltime: !timedelta '01:00:00'

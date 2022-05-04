@@ -1,0 +1,91 @@
+# This file configures the data assimilation, which is not included in
+# this release.  Although the variables are not used, they still must
+# be defined to satisfy validation logic elsewhere.
+
+data_assimilation_template: !Template &data_assimilation_template
+  DOHYBVAR:
+    type: bool
+    description: flag (YES or NO) for hybrid ensemble variational option
+  NMEM_ENKF:
+    type: int
+    description: Number of members of the GFS ENKF ensemble.
+  NMEM_EOMGGRP:   { type: int }
+  NMEM_EFCSGRP:   { type: int }
+  NMEM_EARCGRP:   { type: int }
+  RECENTER_ENKF:  { type: bool }
+  SMOOTH_ENKF:    { type: bool }
+  assim_freq:     { type: int }
+  l4densvar:      { type: bool }
+  lwrite4danl:    { type: bool }
+
+  NSPLIT:
+    type: int
+    description: "Execute prepbufr in parallel.  Operational GFS default is 3."
+
+  NAM_ENKF:
+    type: string
+
+  INCREMENTS_TO_ZERO:
+    type: string list
+
+  PREP_REALTIME:
+    type: bool
+
+  DO_EMCSFC:
+    type: bool
+    description: "Whether to run EMC SFC job"
+
+  PROCESS_TROPCY:
+    type: bool
+
+  DO_RELOCATE:
+    type: bool
+
+  DO_MAKEPREPBUFR:
+    type: bool
+    description: If NO, will copy prepbufr from globaldump.  Otherwise, generates prepbufr file anew.
+
+  OPREFIX:
+    type: string
+    description: Format for dump file name prefix
+
+  COM_OBS:
+    type: string
+    description: Top folder for COMIN_OBS (DMPDIR or COMROOT)
+
+  COMIN_OBS:
+    type: string
+    description: Location to draw observation data from (global dump archive or com)
+
+  RERUN_EFCSGRP:
+    type: bool
+    description: Rerun failed ensemble forecast group members automatically.
+
+  RERUN_EOMGGRP:
+    type: bool
+
+  GENDIAG:
+    type: bool
+
+  NEPOSGRP:
+    type: int
+
+  OBSINPUT_INVOBS: 
+    type: string
+
+  OBSQC_INVOBS:
+    type: string
+
+  ENKF_INNOVATE_GROUPS: 
+    type: int
+
+  ENKF_FORECAST_GROUPS: 
+    type: int
+
+  ENKF_ARCHIVE_GROUPS:
+    type: int
+
+# These variable largely eliminate the need for explicitly setting
+# USH directories, FIX files, PARM files, EXECutables below
+# The USER can overwrite components that they wish
+# e.g. PRVT is used from the GSI
