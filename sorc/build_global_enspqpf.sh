@@ -1,15 +1,19 @@
 #! /usr/bin/env bash
 set -eux
 
-source ./machine-setup.sh > /dev/null 2>&1
+source ./machine-setup.sh
 cwd=`pwd`
 
 progname=global_enspqpf
 
 if [ -f ../modulefiles/gefs/gefs_$target.ver ]; then
     source ../modulefiles/gefs/gefs_$target.ver
+else
+    if [ -f ../versions/build.ver ]; then
+        source ../versions/build.ver
+    fi
 fi
-source ../modulefiles/gefs/${progname}.$target             > /dev/null 2>&1
+source ../modulefiles/gefs/${progname}.$target
 
 # Check final exec folder exists
 if [ ! -d "../exec" ]; then
@@ -17,13 +21,12 @@ if [ ! -d "../exec" ]; then
 fi
 
 #
-#
 cd ${progname}.fd
 
 export FCMP=${FCMP:-ifort}
 export FCMP95=$FCMP
 
-export FFLAGSM="-O3 -g -convert big_endian"
+export FFLAGSM="-O3 -convert big_endian"
 export RECURS=
 export LDFLAGSM=${LDFLAGSM:-""}
 export OMPFLAGM=${OMPFLAGM:-""}
