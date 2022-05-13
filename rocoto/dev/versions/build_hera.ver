@@ -1,17 +1,42 @@
-export ips_ver=18.0.1.163
-export impi_ver=18.0.1
+export EnvVars_ver=1.0.2
+export intel_ver=18.0.5.274
+export impi_ver=2018.0.4
 
-export g2_ver=3.1.0
-export w3nco_ver=2.0.6
-export bacio_ver=2.0.2
+export g2_ver=3.1.1
+export w3nco_ver=2.0.7
+export bacio_ver=2.0.3
 export jasper_ver=1.900.1
-export libpng_ver=1.2.59
-export zlib_ver=1.2.11
-export sfcio_ver=1.0.0
-export sp_ver=2.0.2
-export nemsio_ver=2.2.3
+export png_ver=1.2.44
+export z_ver=1.2.11
 
-export EnvVars_ver=1.0.3
-export w3emc_ver=2.3.0
-export sigio_ver=2.1.0
-export NetCDF_ver=4.5.0
+export nemsio_ver=2.2.4
+export netcdf_ver=4.7.0
+export netcdf_parallel/4.7.4
+
+# -- For FV3
+export hdf5_ver=1.10.6
+export cmake_ver=3.20.2
+export ip_ver=3.3.3
+export sp_ver=2.0.3
+export w3emc_ver=2.7.3
+export bufr_ver=11.5.0
+export sigio_ver=2.3.2
+export crtm_ver=2.3.0
+export esmf_ver=8.0.1
+
+# -- For GSI
+export sfcio_ver=1.1.1
+export prod_util_ver=2.0.13
+export python_ver=3.8.6
+export curl_ver=7.72.0
+
+# -- For UPP ncep_post
+export gfsio_ver=1.4.1
+export g2tmpl_ver=1.9.1
+export wrf_io_ver=1.2.0
+
+# -- For ufs_utils
+export landsfcutil_ver=2.4.1
+export libjpeg_ver=9c
+export wgrib2_ver=2.0.7
+

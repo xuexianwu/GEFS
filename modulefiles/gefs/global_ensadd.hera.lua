@@ -1,28 +1,34 @@
-#%Module#####################################################
-## global_ensadd component - Hera
-#############################################################
-#module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
+help([[
+Load environment for building global_ensadd on hera
+]])
 
-##
-## load programming environment
-## this typically includes compiler, MPI and job scheduler
-##
-module load intel/18.0.5.274
+-- prepend_path("MODULEPATH", "/scratch2/NCEPDEV/nwprod/hpc-stack/libs/hpc-stack-gfsv16/modulefiles/stack")
+prepend_path("MODULEPATH", "/scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles")
 
-##
-## NCEP libraries (temporary version to match the CCPP requirements)
-##
-module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
-module load g2/3.1.1
-module load w3nco/2.0.7
-module load bacio/2.0.3
+intel_ver=os.getenv("intel_ver") or "18.0.5.274"
+load(pathJoin("intel", intel_ver))
 
-module load jasper/1.900.1
-module load png/1.2.44
-module load z/1.2.11
+g2_ver=os.getenv("g2_ver") or "3.1.1"
+load(pathJoin("g2", g2_ver))
 
-##
-export FCMP=ifort
-export LDFLAGSM=
-export OMPFLAGM=
+w3nco_ver=os.getenv("w3nco_ver") or "2.0.7"
+load(pathJoin("w3nco", w3nco_ver))
 
+bacio_ver=os.getenv("bacio_ver") or "2.0.3"
+load(pathJoin("bacio", bacio_ver))
+
+jasper_ver=os.getenv("jasper_ver") or "1.900.1"
+load(pathJoin("jasper", jasper_ver))
+
+png_ver=os.getenv("png_ver") or "1.2.44"
+load(pathJoin("png", png_ver))
+
+z_ver=os.getenv("z_ver") or "1.2.11"
+load(pathJoin("z", z_ver))
+
+
+setenv("FCMP","ifort")
+setenv("LDFLAGSM","")
+setenv("OMPFLAGM","")
+
+whatis("Description: global_ensadd build environment")
