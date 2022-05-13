@@ -19,7 +19,7 @@ ulimit -a
 #export RERUN=NO
 
 # module_ver.h
-. $SOURCEDIR/versions/gefs_hera.ver
+. $GEFS_ROCOTO/dev/versions/run_hera.ver
 
 # Load modules
 . /apps/lmod/lmod/init/ksh
