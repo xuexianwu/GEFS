@@ -1,17 +1,18 @@
+export hpc_ver=1.2.0
+
 export EnvVars_ver=1.0.2
 export intel_ver=18.0.5.274
 export impi_ver=2018.0.4
 
-export g2_ver=3.1.1
-export w3nco_ver=2.0.7
-export bacio_ver=2.0.3
-export jasper_ver=1.900.1
-export png_ver=1.2.44
-export z_ver=1.2.11
+export g2_ver=3.4.5
+export w3nco_ver=2.4.1
+export bacio_ver=2.4.1
+export jasper_ver=2.0.25
+export libpng_ver=1.6.37
+export zlib_ver=1.2.11
 
 export nemsio_ver=2.2.4
-export netcdf_ver=4.7.0
-export netcdf_hdf5parallel_ver=4.7.4
+export netcdf_ver=4.7.0 #4
 
 # -- For FV3
 export hdf5_ver=1.10.6
