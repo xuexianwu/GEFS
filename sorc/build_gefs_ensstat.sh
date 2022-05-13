@@ -6,14 +6,20 @@ cwd=`pwd`
 
 progname=gefs_ensstat
 
-if [ -f ../modulefiles/gefs/gefs_$target.ver ]; then
-    source ../modulefiles/gefs/gefs_$target.ver
+if [ -f ../rocoto/dev/versions/build_$target.ver ]; then
+    source ../rocoto/dev/versions/build_$target.ver
 else
     if [ -f ../versions/build.ver ]; then
         source ../versions/build.ver
     fi
 fi
-source ../modulefiles/gefs/${progname}.$target
+
+if [[ $target == "wcoss2" ]] || [[ $target == "wcoss_dell_p3" ]]; then
+    module use ${cwd}/../modulefiles/gefs
+    module load ${progname}.${target}.lua
+else
+    source ../modulefiles/gefs/${progname}.$target
+fi
 
 # Check final exec folder exists
 if [ ! -d "../exec" ]; then
