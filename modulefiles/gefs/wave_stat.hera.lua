@@ -27,8 +27,8 @@ load(pathJoin("bacio", bacio_ver))
 jasper_ver=os.getenv("jasper_ver") or "1.900.1"
 load(pathJoin("jasper", jasper_ver))
 
-lib_ver=os.getenv("lib_ver") or "1.2.44"
-load(pathJoin("lib", lib_ver))
+png_ver=os.getenv("png_ver") or "1.2.44"
+load(pathJoin("png", png_ver))
 
 z_ver=os.getenv("z_ver") or "1.2.11"
 load(pathJoin("z", z_ver))

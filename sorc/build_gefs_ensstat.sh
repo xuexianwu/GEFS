@@ -1,5 +1,5 @@
-#! /usr/bin/env basg
-sea -eux
+#! /usr/bin/env bash
+set -eux
 
 source ./machine-setup.sh
 cwd=`pwd`

@@ -21,12 +21,16 @@ load(pathJoin("w3nco", w3nco_ver))
 bacio_ver=os.getenv("bacio_ver") or "2.0.3"
 load(pathJoin("bacio", bacio_ver))
 
-netcdf_parallel_ver=os.getenv("netcdf_parallel_ver") or "4.7.4"
-load(pathJoin("netcdf_parallel", netcdf_parallel_ver))
+netcdf_hdf5parallel_ver_ver=os.getenv("netcdf_hdf5parallel_ver") or "4.7.4"
+load(pathJoin("netcdf-hdf5parallel", netcdf_hdf5parallel_ver))
 
 
 setenv("FCMP","ifort")
 setenv("LDFLAGSM","")
 setenv("OMPFLAGM","")
+
+setenv("NETCDF_INCLUDES","${NETCDF}/include")
+setenv("NETCDF_LIBRARIES","${NETCDF}/lib")
+setenv("NETCDF_LDFLAGS_C","-L${NETCDF_LIBRARIES} -lnetcdf")
 
 whatis("Description: gefs_nesio2nc build environment")

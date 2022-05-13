@@ -23,7 +23,11 @@ setenv("FCMP","ifort")
 setenv("LDFLAGSM","")
 setenv("OMPFLAGM","")
 
-setenv("NETCDF_INC","${NETCDF}/include")
-setenv("NETCDF_LDFLAGS","-L${NETCDF}/lib -lnetcdff")
+--setenv("NETCDF_INC","${NETCDF}/include")
+--setenv("NETCDF_LDFLAGS","-L${NETCDF}/lib -lnetcdff")
+
+setenv("NETCDF_INCLUDES","${NETCDF}/include")
+setenv("NETCDF_LIBRARIES","${NETCDF}/lib")
+setenv("NETCDF_LDFLAGS","-L${NETCDF_LIBRARIES} -lnetcdff")
 
 whatis("Description: gefs_nstgen build environment")

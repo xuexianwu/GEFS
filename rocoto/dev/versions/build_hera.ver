@@ -11,7 +11,7 @@ export z_ver=1.2.11
 
 export nemsio_ver=2.2.4
 export netcdf_ver=4.7.0
-export netcdf_parallel/4.7.4
+export netcdf_hdf5parallel_ver=4.7.4
 
 # -- For FV3
 export hdf5_ver=1.10.6
